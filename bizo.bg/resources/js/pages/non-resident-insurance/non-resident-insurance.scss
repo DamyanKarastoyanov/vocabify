@@ -1,0 +1,15 @@
+@import "../../../scss/tokens/breakpoints";
+
+.bz-insurance-title-stack {
+    @media (max-width: $bz-breakpoint-md) {
+        --bz-inline-stack-wrap: wrap !important;
+        --bz-inline-stack-align: center !important;
+        flex-direction: column;
+        gap: var(--bz-space-400);
+        align-items: center;
+
+        .bz-text {
+            text-align: center;
+        }
+    }
+}

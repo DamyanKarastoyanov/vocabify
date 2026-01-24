@@ -1,0 +1,190 @@
+@use "../../../scss/tokens/breakpoints" as *;
+
+// ==========================================================================
+// Components - Button
+// ==========================================================================
+
+.vf-button {
+    --vf-button-font-family: var(--vf-font-family-sans);
+    --vf-button-font-size: var(--vf-font-size-l); // 18px
+    --vf-button-font-weight: var(--vf-font-weight-medium);
+    --vf-button-background-color: var(--vf-color-brand-500);
+    --vf-button-color: var(--vf-color-text-inverse);
+    --vf-button-hover-background-color: var(--vf-color-brand-600);
+    --vf-button-active-background-color: var(--vf-color-brand-700);
+    --vf-button-hover-color: var(--vf-button-color);
+    --vf-button-disabled-background-color: var(--vf-color-border-subtle);
+    --vf-button-disabled-color: var(--vf-color-text-secondary);
+    --vf-button-padding-inline: var(--vf-space-600); // 24px
+    --vf-button-border-radius: var(--vf-border-radius-300);
+    --vf-button-gap: var(--vf-space-200); // 8px
+    --vf-button-height: 3rem; // 48px
+    --vf-button-width: auto;
+
+    // Scale down for large desktop (1536px and below)
+    @media (max-width: $vf-breakpoint-2xl) {
+        --vf-button-font-size: 0.9375rem; // 15px
+        --vf-button-padding-inline: var(--vf-space-500); // 20px
+        --vf-button-height: 2.75rem; // 44px
+        --vf-button-gap: var(--vf-space-150); // 6px
+    }
+
+    // Scale down for medium desktop (1280px and below)
+    @media (max-width: $vf-breakpoint-xl) {
+        --vf-button-font-size: 0.875rem; // 14px
+        --vf-button-padding-inline: var(--vf-space-450); // 18px
+        --vf-button-height: 2.625rem; // 42px
+        --vf-button-gap: var(--vf-space-150); // 6px
+    }
+
+    // Scale down for small desktop (1024px and below)
+    @media (max-width: $vf-breakpoint-lg) {
+        --vf-button-font-size: 0.8125rem; // 13px
+        --vf-button-padding-inline: var(--vf-space-400); // 16px
+        --vf-button-height: 2.5rem; // 40px
+        --vf-button-gap: var(--vf-space-100); // 4px
+    }
+
+    display: inline-flex;
+    align-items: center;
+    gap: var(--vf-button-gap);
+    height: var(--vf-button-height);
+    width: var(--vf-button-width);
+    padding-inline: var(--vf-button-padding-inline);
+    border: 0;
+    border-radius: var(--vf-button-border-radius);
+    justify-content: center;
+    font-family: var(--vf-button-font-family);
+    font-size: var(--vf-button-font-size);
+    font-weight: var(--vf-button-font-weight);
+    line-height: var(--vf-line-height);
+    color: var(--vf-button-color);
+    background-color: var(--vf-button-background-color);
+    cursor: pointer;
+    appearance: none;
+    text-decoration: none;
+
+    &:hover,
+    &:focus,
+    &[aria-expanded="true"] {
+        background-color: var(--vf-button-hover-background-color);
+        color: var(--vf-button-hover-color);
+    }
+
+    &:active,
+    &--pressed,
+    &--pressed:hover {
+        background-color: var(--vf-button-active-background-color);
+        color: var(--vf-button-hover-color);
+    }
+
+    &[disabled] {
+        background-color: var(--vf-button-disabled-background-color);
+        color: var(--vf-button-disabled-color);
+        cursor: default;
+        opacity: 0.5;
+        pointer-events: none;
+    }
+
+    &--loading {
+        position: relative;
+        pointer-events: none;
+    }
+
+    &--variant-secondary {
+        --vf-button-background-color: var(--vf-color-surface-0);
+        --vf-button-color: var(--vf-color-brand-500);
+        --vf-button-hover-background-color: var(--vf-color-brand-100);
+        --vf-button-active-background-color: var(--vf-color-brand-100);
+    }
+
+    &--variant-outline {
+        --vf-button-background-color: transparent;
+        --vf-button-hover-background-color: var(--vf-color-brand-100);
+        --vf-button-active-background-color: var(--vf-color-brand-100);
+        --vf-button-color: var(--vf-color-brand-500);
+        --vf-button-hover-color: var(--vf-color-brand-500);
+        border: 1.5px solid var(--vf-color-brand-500);
+
+        // Scale down for large desktop (1536px and below)
+        @media (max-width: $vf-breakpoint-2xl) {
+            border-width: 1.25px;
+        }
+
+        // Scale down for medium desktop (1280px and below)
+        @media (max-width: $vf-breakpoint-xl) {
+            border-width: 1px;
+        }
+
+        // Scale down for small desktop (1024px and below)
+        @media (max-width: $vf-breakpoint-lg) {
+            border-width: 1px;
+        }
+    }
+
+    &--variant-outline:hover,
+    &--variant-outline:focus,
+    &--variant-outline:active,
+    &--variant-outline[aria-expanded="true"] {
+        border: 1.5px solid var(--vf-color-brand-500);
+
+        // Scale down for large desktop (1536px and below)
+        @media (max-width: $vf-breakpoint-2xl) {
+            border-width: 1.25px;
+        }
+
+        // Scale down for medium desktop (1280px and below)
+        @media (max-width: $vf-breakpoint-xl) {
+            border-width: 1px;
+        }
+
+        // Scale down for small desktop (1024px and below)
+        @media (max-width: $vf-breakpoint-lg) {
+            border-width: 1px;
+        }
+    }
+
+    &--variant-plain {
+        --vf-button-color: var(--vf-color-brand-900);
+        --vf-button-background-color: transparent;
+        --vf-button-hover-background-color: var(--vf-color-brand-100);
+        --vf-button-active-background-color: var(--vf-color-brand-100);
+        --vf-button-disabled-background-color: transparent;
+
+        &:hover,
+        &:focus,
+        &:active,
+        &[aria-expanded="true"] {
+            background-color: var(--vf-button-hover-background-color);
+            color: var(--vf-color-brand-600);
+        }
+    }
+}
+
+.vf-button__affix {
+    .vf-button--loading & {
+        opacity: 0;
+    }
+}
+
+.vf-button__text {
+    .vf-button--loading & {
+        opacity: 0;
+    }
+}
+
+.vf-button__spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 0;
+}
+
+.vf-button__spinner svg {
+    display: block;
+}

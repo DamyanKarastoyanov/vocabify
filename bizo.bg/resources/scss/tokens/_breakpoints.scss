@@ -1,0 +1,26 @@
+// ==========================================================================
+// Tokens - Breakpoints
+// ==========================================================================
+
+// Sass variables for use in media queries (CSS custom properties can't be used in @media)
+$bz-breakpoint-xs: 480px; // Small mobile
+$bz-breakpoint-sm: 850px; // Mobile/Tablet
+$bz-breakpoint-md: 1024px; // Tablet
+$bz-breakpoint-lg: 1280px; // Extra small desktop
+$bz-breakpoint-xl: 1367px; // Small desktop
+$bz-breakpoint-2xl: 1520px; // Medium desktop
+$bz-breakpoint-3xl: 1800px; // Large desktop
+$bz-breakpoint-4xl: 1920px; // Extra large desktop
+
+// CSS custom properties for use in JavaScript or other contexts
+:root {
+    // Mobile-first approach
+    --bz-breakpoint-xs: #{$bz-breakpoint-xs};
+    --bz-breakpoint-sm: #{$bz-breakpoint-sm};
+    --bz-breakpoint-md: #{$bz-breakpoint-md};
+    --bz-breakpoint-lg: #{$bz-breakpoint-lg};
+    --bz-breakpoint-xl: #{$bz-breakpoint-xl};
+    --bz-breakpoint-2xl: #{$bz-breakpoint-2xl};
+    --bz-breakpoint-3xl: #{$bz-breakpoint-3xl};
+    --bz-breakpoint-4xl: #{$bz-breakpoint-4xl};
+}

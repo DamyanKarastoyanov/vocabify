@@ -1,0 +1,6 @@
+@mixin background-multiply($background-color) {
+    background: linear-gradient($background-color, $background-color),
+        linear-gradient($background-color, $background-color);
+
+    background-blend-mode: multiply;
+}

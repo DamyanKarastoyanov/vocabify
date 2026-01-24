@@ -1,0 +1,17 @@
+// ==========================================================================
+// Components - Block Stack
+// ==========================================================================
+
+:root {
+    --bz-block-stack-gap: 0;
+    --bz-block-stack-align: start;
+    --bz-block-stack-inline-align: stretch;
+}
+
+.bz-block-stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--bz-block-stack-gap);
+    justify-content: var(--bz-block-stack-align);
+    align-items: var(--bz-block-stack-inline-align);
+}

@@ -1,0 +1,60 @@
+@use "../../../scss/tokens/breakpoints" as *;
+
+.bz-mvr-fines-check-page {
+    @media (max-width: $bz-breakpoint-md) {
+        gap: var(--bz-space-1200);
+
+        > .bz-inline-stack:first-child {
+            justify-content: center;
+            flex-wrap: wrap;
+            flex-direction: column;
+
+            .bz-text {
+                max-width: 52%;
+                min-width: 0;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+                text-align: center;
+            }
+        }
+    }
+
+    @media (max-width: $bz-breakpoint-xs) {
+        > .bz-inline-stack:first-child {
+            .bz-text {
+                max-width: 90%;
+            }
+        }
+
+        .bz-button:not(.bz-insurance-bubble-icon-button),
+        button:not(.bz-insurance-bubble-icon-button) {
+            width: 100% !important;
+        }
+    }
+
+    .bz-mvr-fines-check-results-row {
+        display: flex;
+        gap: 8px;
+        align-items: flex-start;
+        width: 100%;
+    }
+
+    .bz-mvr-fines-obligation {
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-200);
+        margin-bottom: var(--bz-space-400);
+        --bz-box-padding-block-start: none;
+        --bz-box-padding-block-end: none;
+    }
+
+    .bz-mvr-fines-totals {
+        background-color: var(--color-surface-subdued);
+        border-radius: var(--radius-200);
+    }
+
+    @media (max-width: $bz-breakpoint-md) {
+        .bz-insurance-form-holder > .bz-block-stack:first-child {
+            gap: var(--bz-space-1200);
+        }
+    }
+}

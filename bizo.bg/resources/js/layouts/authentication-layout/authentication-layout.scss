@@ -1,0 +1,9 @@
+.bz-authentication-layout {
+    width: var(--bz-size-10400);
+    margin: 0 auto;
+
+    @media (max-width: 500px) {
+        padding: 0 var(--bz-size-600);
+        width: 100%;
+    }
+}

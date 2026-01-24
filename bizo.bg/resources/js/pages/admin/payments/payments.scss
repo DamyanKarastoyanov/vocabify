@@ -1,0 +1,17 @@
+.bz-admin-payments-wrapper {
+    padding: var(--bz-space-600);
+}
+
+.bz-admin-payments-details {
+    .bz-block-stack {
+        gap: var(--bz-space-300);
+    }
+
+    .bz-input-field-holder {
+        flex: 1;
+    }
+
+    &-header {
+        padding-bottom: var(--bz-space-300);
+    }
+}

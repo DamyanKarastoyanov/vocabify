@@ -1,0 +1,44 @@
+.vf-text-input {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    width: 100%;
+
+    &__input {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border: 1px solid var(--vf-color-border-default);
+        border-radius: 0.375rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        color: var(--vf-color-text-primary);
+        background-color: var(--vf-color-surface-0);
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+        &:focus {
+            outline: none;
+            border-color: var(--vf-color-border-focus);
+            box-shadow: 0 0 0 3px var(--vf-color-shadow-focus);
+        }
+
+        &:disabled {
+            background-color: var(--vf-color-surface-100);
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        &--error {
+            border-color: var(--vf-color-border-error);
+        }
+
+        &--error:focus {
+            border-color: var(--vf-color-border-error);
+            box-shadow: 0 0 0 3px var(--vf-color-shadow-error);
+        }
+    }
+
+    &__error {
+        font-size: 0.875rem;
+        color: var(--vf-color-text-error);
+    }
+}

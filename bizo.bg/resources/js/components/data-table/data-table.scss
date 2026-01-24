@@ -1,0 +1,122 @@
+.bz-data-table {
+    --bz-table-sort-offset: 28px;
+    .bz-table-wrapper {
+        overflow-x: auto;
+        border-radius: var(--bz-space-200);
+    }
+
+    .bz-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    // Comfortable spacing for headers and cells
+    .bz-table th,
+    .bz-table td {
+        padding: 12px 16px;
+        vertical-align: middle;
+        text-align: center;
+    }
+
+    .bz-table__th {
+        vertical-align: middle;
+        background-color: var(--bz-color-blue-100);
+        color: var(--bz-color-white);
+        position: relative;
+    }
+
+    // Sticky first and last column
+    .bz-table th:first-child,
+    .bz-table td:first-child,
+    .bz-table th:last-child,
+    .bz-table td:last-child {
+        position: sticky;
+        z-index: 1;
+    }
+
+    .bz-table th:first-child,
+    .bz-table td:first-child {
+        left: 0;
+    }
+
+    .bz-table th:last-child,
+    .bz-table td:last-child {
+        right: 0;
+    }
+
+    .bz-table td:first-child,
+    .bz-table td:last-child {
+        background-color: var(--bz-color-gray-100);
+    }
+
+    // Ensure header cells stack above body cells when overlapping
+    .bz-table th:first-child,
+    .bz-table th:last-child {
+        z-index: 2;
+    }
+
+    .bz-table__header-bar {
+        min-height: 36px;
+        white-space: nowrap;
+    }
+
+    .bz-table__title {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        min-width: 0;
+        flex: 1 1 auto;
+    }
+
+    .bz-table__title-zone {
+        position: relative;
+        flex: 1 1 auto;
+        padding-right: var(--bz-table-sort-offset);
+        padding-left: var(--bz-table-sort-offset);
+    }
+
+    .bz-table__input-wrapper {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: var(--bz-table-sort-offset);
+        right: var(--bz-table-sort-offset);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        .bz-text-input {
+            --bz-text-input-gap: 0;
+            --bz-text-input-border: 0;
+            --bz-text-input-padding-inline: 0;
+            --bz-text-input-background-color: transparent;
+            --bz-text-input-color: var(--bz-color-white);
+            --bz-text-input-placeholder-color: rgb(
+                var(--bz-color-white-rgb),
+                0.7
+            );
+            font-weight: 400;
+            width: 100%;
+        }
+
+        .bz-text-input__input {
+            text-align: center;
+        }
+    }
+
+    .bz-table__th--searchable
+        .bz-table__title-zone:hover
+        .bz-table__input-wrapper,
+    .bz-table__th--searchable .bz-table__input-wrapper:hover,
+    .bz-table__th--searchable
+        .bz-table__title-zone:focus-within
+        .bz-table__input-wrapper {
+        display: flex;
+    }
+
+    .bz-table__th--searchable .bz-table__title-zone:hover .bz-table__title,
+    .bz-table__th--searchable
+        .bz-table__title-zone:focus-within
+        .bz-table__title {
+        visibility: hidden;
+    }
+}

@@ -1,0 +1,47 @@
+// ==========================================================================
+// Components - Box
+// ==========================================================================
+
+.vf-box {
+    --vf-box-width: initial;
+    --vf-box-min-width: initial;
+    --vf-box-max-width: initial;
+    --vf-box-height: initial;
+    --vf-box-min-height: initial;
+    --vf-box-max-height: initial;
+    --vf-box-padding-block-start: initial;
+    --vf-box-padding-block-end: initial;
+    --vf-box-padding-inline-start: initial;
+    --vf-box-padding-inline-end: initial;
+    --vf-box-inset-block-start: initial;
+    --vf-box-inset-block-end: initial;
+    --vf-box-inset-inline-start: initial;
+    --vf-box-inset-inline-end: initial;
+    --vf-box-border-start-start-radius: initial;
+    --vf-box-border-start-end-radius: initial;
+    --vf-box-border-end-start-radius: initial;
+    --vf-box-border-end-end-radius: initial;
+    --vf-box-background-color: initial;
+    --vf-box-color: initial;
+
+    width: var(--vf-box-width);
+    min-width: var(--vf-box-min-width);
+    max-width: var(--vf-box-max-width);
+    height: var(--vf-box-height);
+    min-height: var(--vf-box-min-height);
+    max-height: var(--vf-box-max-height);
+    padding-block-start: var(--vf-box-padding-block-start);
+    padding-block-end: var(--vf-box-padding-block-end);
+    padding-inline-start: var(--vf-box-padding-inline-start);
+    padding-inline-end: var(--vf-box-padding-inline-end);
+    inset-block-start: var(--vf-box-inset-block-start);
+    inset-block-end: var(--vf-box-inset-block-end);
+    inset-inline-start: var(--vf-box-inset-inline-start);
+    inset-inline-end: var(--vf-box-inset-inline-end);
+    border-start-start-radius: var(--vf-box-border-start-start-radius);
+    border-start-end-radius: var(--vf-box-border-start-end-radius);
+    border-end-start-radius: var(--vf-box-border-end-start-radius);
+    border-end-end-radius: var(--vf-box-border-end-end-radius);
+    background-color: var(--vf-box-background-color);
+    color: var(--vf-box-color);
+}

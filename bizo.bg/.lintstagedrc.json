@@ -1,0 +1,7 @@
+{
+    "**/*.{css,scss}": "npx prettier --write",
+    "**/*.{js,jsx}": [
+        "npx prettier --write"
+    ],
+    "**/*.php": "npx pint"
+}

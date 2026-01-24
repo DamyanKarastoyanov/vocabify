@@ -1,0 +1,18 @@
+@use "../../../scss/tokens/breakpoints" as *;
+
+.bz-opt-in-form-surface {
+    padding: var(--bz-space-1000);
+    background-color: var(--bz-color-brand-100);
+    border-radius: var(--bz-surface-border-radius);
+
+    @media (max-width: $bz-breakpoint-md) {
+        padding: var(--bz-space-600); // 24px for tablet and mobile
+    }
+
+    .bz-opt-in-form {
+        .bz-opt-in-form-header {
+            width: 75%;
+            margin: 0 auto;
+        }
+    }
+}

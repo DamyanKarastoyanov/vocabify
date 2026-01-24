@@ -1,0 +1,39 @@
+// ==========================================================================
+// Welcome Page - New Design
+// ==========================================================================
+
+@use "@/pages/welcome/components/hero/hero";
+@use "@/pages/welcome/components/insurance-cards/insurance-cards";
+@use "@/pages/welcome/components/partners/partners";
+@use "@/pages/welcome/components/policy-cta/policy-cta";
+@use "@/pages/welcome/components/features-diagram/features-diagram";
+@use "@/pages/welcome/components/three-steps/three-steps";
+
+.bz-welcome {
+    width: 100%;
+    overflow-x: hidden;
+    background: var(--bz-color-surface-0);
+    margin-top: var(--bz-app-bar-height);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1 1 auto; // Allow welcome content to grow naturally
+}
+
+// Override app layout header for welcome page
+.bz-app-layout:has(.bz-welcome) {
+    .bz-app-layout__header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        background: transparent;
+    }
+
+    .bz-app-layout__content {
+        padding-top: 0;
+        min-height: auto; // Allow content to expand beyond viewport
+        overflow-y: visible; // Ensure vertical scrolling is enabled
+    }
+}

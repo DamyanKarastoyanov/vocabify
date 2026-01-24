@@ -1,0 +1,12 @@
+.vf-form-label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--vf-color-text-primary);
+    margin-bottom: 0.5rem;
+
+    &__required {
+        color: var(--vf-color-text-error);
+        margin-left: 0.25rem;
+    }
+}

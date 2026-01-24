@@ -1,0 +1,58 @@
+@use "../../../scss/tokens/breakpoints" as *;
+
+.bz-additional-services-section {
+    width: 100%;
+
+    &__cards {
+        width: 100%;
+        flex-wrap: wrap;
+
+        @media (max-width: $bz-breakpoint-md) {
+            gap: var(--bz-space-400);
+        }
+    }
+
+    &__card-link,
+    &__card-wrapper {
+        flex: 1 1 0%;
+        max-width: calc((100% - var(--bz-space-600)) / 2);
+        min-width: 0;
+        text-decoration: none;
+        cursor: pointer;
+        min-width: 190px;
+
+        @media (max-width: $bz-breakpoint-md) {
+            max-width: calc((100% - var(--bz-space-400)) / 2);
+        }
+
+        @media (max-width: $bz-breakpoint-xs) {
+            min-width: 100%;
+            max-width: 100%;
+        }
+    }
+
+    &__card {
+        height: 100%;
+        border-radius: var(--bz-border-radius-500);
+        box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.1);
+        transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease;
+
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0px 12px 40px 0px rgba(0, 0, 0, 0.15);
+        }
+
+        @media (max-width: $bz-breakpoint-md) {
+            > .bz-box {
+                padding: var(--bz-space-600) var(--bz-space-400);
+            }
+        }
+    }
+
+    &__icon {
+        width: 80px;
+        height: 80px;
+    }
+}

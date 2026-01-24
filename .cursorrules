@@ -1,0 +1,183 @@
+# Vocabify Project Context
+
+## Project Overview
+Personal-first vocabulary learning application built with Laravel 12 + React (Inertia.js). Focuses on active recall, mixed-direction testing, and user-controlled evaluation.
+
+## Core Philosophy
+- Optimizes for cognitive difficulty and active recall, not engagement loops
+- User-controlled evaluation (Reviewer Mode is core, not fallback)
+- No gamification, streaks, XP, badges, or social features
+- Human judgment over automation
+
+## Tech Stack
+- **Backend**: Laravel 12, PHP 8.2+, Inertia.js
+- **Frontend**: React 18, Vite, TailwindCSS 4, Inertia.js
+- **Database**: MySQL/PostgreSQL (SQLite for development)
+
+## Project Structure
+
+### Backend Structure
+```
+app/
+├── Http/
+│   ├── Controllers/
+│   │   └── Auth/          # Authentication controllers
+│   ├── Web/               # Feature-based organization
+│   │   └── PageName/      # Each feature has its own folder
+│   │       ├── Controllers/  # Feature-specific controllers (required)
+│   │       ├── Requests/     # Feature-specific form requests (required)
+│   │       ├── Queries/      # Feature-specific queries (required)
+│   │       ├── Resources/    # Feature-specific API resources (required)
+│   │       └── [others]/     # Additional folders as needed (Data/, etc.)
+│   ├── Middleware/
+│   └── Requests/          # Shared/general requests
+
+domain/
+└── Vocabulary/            # Domain-driven design module
+    ├── Actions/           # Business operations (Create dataset, Add words, Start session, etc.)
+    ├── Models/            # Core models (Dataset, Word, Session, SessionItem)
+    ├── Requests/          # Form request validation
+    ├── Services/          # Domain services (Session generation, Answer checking)
+    └── Policies/          # Authorization policies
+```
+
+### Backend Feature Structure Pattern
+- **Each feature MUST have its own folder** in `app/Http/Web/PageName/` (PascalCase)
+- **Required subdirectories** in each feature folder:
+  - `Controllers/` - Feature-specific controllers (PascalCase class names)
+  - `Requests/` - Feature-specific form request validation (PascalCase class names)
+  - `Queries/` - Feature-specific query classes (PascalCase class names)
+  - `Resources/` - Feature-specific API resources/transformers (PascalCase class names)
+- **Optional subdirectories** (add as needed):
+  - `Data/` - Feature-specific data transfer objects or data classes (PascalCase class names)
+  - Other folders as needed for the feature
+
+### Frontend Structure
+```
+resources/js/
+├── pages/                 # Inertia page components (mapped to routes)
+│   └── page-name/        # Each page has its own folder (kebab-case)
+│       ├── components/    # Page-specific components (required)
+│       ├── validations/  # Page-specific validation schemas (required)
+│       ├── data/         # Page-specific data fetching/handling (required)
+│       ├── page-name.jsx # Main page component (kebab-case)
+│       ├── page-name.scss # Page-specific SCSS (kebab-case, required)
+│       └── [others]/     # Additional folders as needed (contexts, reducers, utils, etc.)
+├── components/            # Reusable React components (shared across pages)
+├── layouts/               # Layout components
+│   └── layout-name/      # Each layout has its own folder (kebab-case)
+│       ├── layout-name.jsx  # Main layout component (kebab-case)
+│       ├── components/    # Page-specific components (required)
+│       ├── validations/  # Page-specific validation schemas (required)
+│       ├── data/         # Page-specific data fetching/handling (required)
+│       └── [others]/     # Additional folders as needed (contexts, reducers, utils, etc.)
+├── hooks/                 # Custom React hooks
+└── utils/                 # Utility functions
+
+resources/css/ (or resources/scss/)
+└── app.scss              # Main SCSS file - imports all page SCSS files
+```
+
+### Page Structure Pattern
+- **Each page MUST have its own folder** in `resources/js/pages/page-name/` (kebab-case)
+- **Required subdirectories** in each page folder:
+  - `components/` - Page-specific React components
+  - `validations/` - Page-specific validation schemas/rules
+  - `data/` - Page-specific data fetching, queries, or data handling
+- **Required file** in each page folder:
+  - `page-name.jsx` - Main page component (kebab-case)
+  - `page-name.scss` - Page-specific SCSS file containing strictly logic with classNames related to that page (kebab-case)
+- **Optional subdirectories** (add as needed):
+  - `contexts/` - React contexts for page state
+  - `reducers/` - State reducers
+  - `utils/` - Page-specific utility functions
+  - `constants/` - Page-specific constants
+- **Main page component** should be `resources/js/pages/page-name/page-name.jsx` or `resources/js/pages/page-name/index.jsx` (kebab-case)
+
+### Layout Structure Pattern
+- **Each layout MUST have its own folder** in `resources/js/layouts/layout-name/` (kebab-case)
+- **Main layout component** should be `resources/js/layouts/layout-name/layout-name.jsx` or `resources/js/layouts/layout-name/index.jsx` (kebab-case)
+- **Optional files/folders** (add as needed):
+  - Styles (`.scss`, `.css`) - use kebab-case for file names
+  - `contexts/` - Layout-specific React contexts
+  - Other supporting files
+
+## Important Patterns
+
+### Routing
+- All routes in `routes/web.php`
+- Routes serve: authentication pages, React SPA entry point, JSON endpoints
+- Term "API" reserved for external integrations only
+- Internal JSON endpoints are application routes, not public APIs
+
+### Domain-Driven Design
+- Controllers are thin HTTP adapters - delegate to domain actions
+- All business logic in `domain/Vocabulary/`
+- Models, Actions, Services, Policies in domain module
+
+### Frontend
+- Use Inertia.js for routing (no React Router)
+- Page components in `resources/js/pages/`
+- **ALWAYS use `@/` alias for imports from `resources/js/`** - Never use relative paths like `../` or `./`
+- Use `@assets/` alias for assets from `resources/assets/`
+- No React imports needed (automatic JSX runtime)
+
+### Styling
+- **Each page MUST have its own SCSS file**: `resources/js/pages/page-name/page-name.scss` (kebab-case)
+- **Page SCSS files contain strictly logic with classNames related to that page** - no shared styles or global overrides
+- **All page SCSS files MUST be imported in `resources/css/app.scss`** (or `resources/scss/app.scss` if using SCSS structure)
+- Import pattern: `@use "@/pages/page-name/page-name";` (kebab-case)
+- Example structure:
+  ```
+  resources/css/app.scss (or resources/scss/app.scss)
+  ├── @use "@/pages/home/home";
+  ├── @use "@/pages/datasets/datasets";
+  └── @use "@/pages/study-sessions/study-sessions";
+  ```
+
+### React Component Patterns
+- **NEVER use destructured props in function parameters**: 
+  - ❌ `function Component({ propName, otherProp }) { ... }`
+  - ❌ `const Component = ({ propName, otherProp }) => { ... }`
+- **ALWAYS destructure props inside the function body**:
+  - ✅ `const Component = (props) => { const { propName, otherProp } = props; ... }`
+  - ✅ `function Component(props) { const { propName, otherProp } = props; ... }`
+
+### File Naming
+- **Backend (PHP)**: PascalCase for classes (e.g., `DatasetController`, `StoreDatasetRequest`), camelCase for methods
+- **Frontend Files**: kebab-case for all files and folders (e.g., `home.jsx`, `dataset-form.jsx`, `user-profile/`)
+- **React Components**: PascalCase for component names (e.g., `DatasetForm`, `UserProfile`), but files use kebab-case (e.g., `dataset-form.jsx`)
+- Files: Match class/component name with appropriate casing
+
+## Code Style
+- Follow Laravel conventions
+- Use Laravel Pint for PHP formatting
+- Use Prettier for JS/JSX formatting
+- Keep controllers thin - delegate to domain actions
+
+## Key Features to Implement
+1. Dataset management (decks of vocabulary words)
+2. Study sessions (random word selection, mixed recall directions)
+3. Reviewer Mode (user manually marks correctness)
+4. Support for typed input and external recall (paper-based)
+
+## Development Commands
+```bash
+php artisan serve          # Backend server
+npm run dev                # Vite dev server
+npm run build              # Build frontend assets
+php artisan migrate        # Run migrations
+```
+
+## When Making Changes
+- Always check domain structure before adding business logic
+- **Backend Features**: Create folder in `app/Http/Web/PageName/` (PascalCase) with required subdirectories (Controllers/, Requests/, Queries/, Resources/)
+  - All class names must be PascalCase (e.g., `DatasetController`, `StoreDatasetRequest`)
+- Keep controllers thin - use domain actions
+- **Frontend Pages**: Create folder in `resources/js/pages/page-name/` (kebab-case) with required subdirectories (components/, validations/, data/)
+  - All files and folders must be kebab-case (e.g., `dataset-form.jsx`, `user-profile/`)
+  - Component names are PascalCase (e.g., `DatasetForm`, `UserProfile`)
+- **Frontend Pages Styling**: Create `page-name.scss` (kebab-case) in the page folder and import it in `resources/css/app.scss` (or `resources/scss/app.scss`)
+- Use Inertia responses: `Inertia::render('page-name')` (kebab-case)
+- Follow existing patterns in domain/Vocabulary module
+- Maintain user-controlled evaluation philosophy

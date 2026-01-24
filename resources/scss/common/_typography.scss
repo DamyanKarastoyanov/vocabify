@@ -1,0 +1,32 @@
+// ==========================================================================
+// Common - Typography
+// ==========================================================================
+
+:where(h1, h2, h3, h4, h5, h6, p) {
+    // Prevent text overflow.
+    overflow-wrap: break-word;
+}
+
+:where(h1, h2, h3, h4, h5, h6) {
+    // Reset text rendering.
+    font-size: 1rem;
+    font-weight: normal;
+}
+
+:where(b) {
+    // Fix font weight in Edge in Safari.
+    font-weight: bolder;
+}
+
+:where(strong) {
+    font-weight: var(--vf-font-weight-medium);
+}
+
+:where(small) {
+    // Fix font size in all browsers.
+    font-size: 80%;
+}
+
+:where(ul, ol) {
+    padding-inline-start: var(--vf-space-400);
+}

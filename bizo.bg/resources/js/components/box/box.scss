@@ -1,0 +1,47 @@
+// ==========================================================================
+// Components - Box
+// ==========================================================================
+
+.bz-box {
+    --bz-box-width: initial;
+    --bz-box-min-width: initial;
+    --bz-box-max-width: initial;
+    --bz-box-height: initial;
+    --bz-box-min-height: initial;
+    --bz-box-max-height: initial;
+    --bz-box-padding-block-start: initial;
+    --bz-box-padding-block-end: initial;
+    --bz-box-padding-inline-start: initial;
+    --bz-box-padding-inline-end: initial;
+    --bz-box-inset-block-start: initial;
+    --bz-box-inset-block-end: initial;
+    --bz-box-inset-inline-start: initial;
+    --bz-box-inset-inline-end: initial;
+    --bz-box-border-start-start-radius: initial;
+    --bz-box-border-start-end-radius: initial;
+    --bz-box-border-end-start-radius: initial;
+    --bz-box-border-end-end-radius: initial;
+    --bz-box-background-color: initial;
+    --bz-box-color: initial;
+
+    width: var(--bz-box-width);
+    min-width: var(--bz-box-min-width);
+    max-width: var(--bz-box-max-width);
+    height: var(--bz-box-height);
+    min-height: var(--bz-box-min-height);
+    max-height: var(--bz-box-max-height);
+    padding-block-start: var(--bz-box-padding-block-start);
+    padding-block-end: var(--bz-box-padding-block-end);
+    padding-inline-start: var(--bz-box-padding-inline-start);
+    padding-inline-end: var(--bz-box-padding-inline-end);
+    inset-block-start: var(--bz-box-inset-block-start);
+    inset-block-end: var(--bz-box-inset-block-end);
+    inset-inline-start: var(--bz-box-inset-inline-start);
+    inset-inline-end: var(--bz-box-inset-inline-end);
+    border-start-start-radius: var(--bz-box-border-start-start-radius);
+    border-start-end-radius: var(--bz-box-border-start-end-radius);
+    border-end-start-radius: var(--bz-box-border-end-start-radius);
+    border-end-end-radius: var(--bz-box-border-end-end-radius);
+    background-color: var(--bz-box-background-color);
+    color: var(--bz-box-color);
+}

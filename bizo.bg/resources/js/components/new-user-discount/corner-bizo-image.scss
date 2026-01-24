@@ -1,0 +1,17 @@
+.bz-corner-bizo-image {
+    --bz-corner-bizo-image-height: 91px;
+    --bz-corner-bizo-image-width: 88px;
+    --bz-corner-bizo-image-background-size: 145px auto;
+
+    background-position: top;
+    overflow: hidden;
+    position: absolute;
+    top: calc(111% - var(--bz-corner-bizo-image-height));
+    left: calc(103% - var(--bz-corner-bizo-image-width));
+    height: var(--bz-corner-bizo-image-height);
+    width: var(--bz-corner-bizo-image-width);
+    background-size: var(--bz-corner-bizo-image-background-size);
+    transform: rotate(-45deg) scaleX(-1);
+
+    background-image: url('@assets/CaptainBizo.png');
+}

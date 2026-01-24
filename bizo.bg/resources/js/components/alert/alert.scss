@@ -1,0 +1,13 @@
+.bz-alert-toast-container {
+    --bz-alert-toast-container-background-color: var(--bz-color-white);
+    --bz-alert-toast-container-padding: var(--bz-size-400);
+    --bz-alert-toast-container-border-radius: var(--bz-border-radius-400);
+    --bz-alert-toast-container-box-shadow: var(--bz-shadow-500);
+
+    width: 24rem;
+    height: max-content;
+    background-color: var(--bz-alert-toast-container-background-color);
+    padding: var(--bz-alert-toast-container-padding);
+    border-radius: var(--bz-alert-toast-container-border-radius);
+    box-shadow: var(--bz-alert-toast-container-box-shadow);
+}

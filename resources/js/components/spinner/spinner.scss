@@ -1,0 +1,43 @@
+// ==========================================================================
+// Components - Spinner
+// ==========================================================================
+
+.vf-spinner {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: inherit;
+}
+
+.vf-spinner__icon {
+    display: block;
+    animation: vf-spinner-rotate 0.8s linear infinite;
+}
+
+.vf-spinner__circle {
+    animation: vf-spinner-dash 1.6s ease-in-out infinite;
+}
+
+@keyframes vf-spinner-rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes vf-spinner-dash {
+    0% {
+        stroke-dasharray: 1, 43.98;
+        stroke-dashoffset: 0;
+    }
+    50% {
+        stroke-dasharray: 21.99, 43.98;
+        stroke-dashoffset: -10.99;
+    }
+    100% {
+        stroke-dasharray: 1, 43.98;
+        stroke-dashoffset: -43.98;
+    }
+}

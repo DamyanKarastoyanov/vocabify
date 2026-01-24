@@ -1,0 +1,18 @@
+.bz-admin-layout {
+    padding: var(--bz-space-600);
+    min-width: 0;
+
+    @media (max-width: 768px) {
+        padding: var(--bz-space-450);
+        gap: var(--bz-space-300);
+    }
+
+    &__right-section {
+        min-width: 0;
+
+        @media (max-width: 768px) {
+            height: auto;
+            gap: var(--bz-space-200);
+        }
+    }
+}

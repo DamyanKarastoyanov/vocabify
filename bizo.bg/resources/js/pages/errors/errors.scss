@@ -1,0 +1,208 @@
+// ==========================================================================
+// Error Page Styles
+// ==========================================================================
+
+@keyframes float {
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.bz-errors-page__container {
+    position: relative;
+    min-height: 100vh;
+    color: white;
+    background-image: url("@/../../resources/assets/errorBizo.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    overflow: hidden;
+
+    // Mobile background positioning to keep character visible
+    @media (max-width: 1024px) {
+        background-position: 75% center;
+        background-size: cover;
+    }
+
+    @media (max-width: 768px) {
+        background-position: 70% center;
+        background-size: cover;
+    }
+
+    @media (max-width: 480px) {
+        background-position: 75% center;
+        background-size: cover;
+    }
+
+    @media (max-width: 360px) {
+        background-position: 80% center;
+        background-size: cover;
+    }
+
+    @media (max-width: 320px) {
+        background-position: 85% center;
+        background-size: cover;
+    }
+}
+
+.bz-errors-page__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(0, 21, 39, 0.7) 0%,
+        rgba(0, 29, 54, 0.6) 50%,
+        rgba(13, 47, 77, 0.5) 100%
+    );
+    z-index: 1;
+}
+
+.bz-errors-page__logo {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    z-index: 20;
+    display: inline-block;
+    padding: 0.75rem;
+    border-radius: 12px;
+    //background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    // border: 1px solid rgba(255, 255, 255, 0.15);
+    transition: all 0.3s ease;
+    text-decoration: none;
+
+    // Responsive adjustments - bigger logo for mobile
+    @media (max-width: 1024px) {
+        top: 2rem;
+        left: 2rem;
+        padding: 1rem;
+
+        .bz-icon {
+            transform: scale(1.3);
+        }
+    }
+
+    @media (max-width: 768px) {
+        top: 1.5rem;
+        left: 1.5rem;
+        padding: 0.75rem;
+
+        .bz-icon {
+            transform: scale(1.4);
+        }
+    }
+
+    @media (max-width: 480px) {
+        top: 1rem;
+        left: 1rem;
+        padding: 0.75rem;
+
+        .bz-icon {
+            transform: scale(1.5);
+        }
+    }
+
+    @media (max-width: 320px) {
+        .bz-icon {
+            transform: scale(1.3);
+        }
+    }
+}
+
+.bz-errors-page__content {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    transform: translate(0%, -50%);
+    text-align: center;
+    width: 90%;
+    max-width: 700px;
+    z-index: 10;
+
+    // Mobile centering - tablets and smaller
+    @media (max-width: 1024px) {
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 85%;
+        padding: 0 1rem;
+
+        .bz-block-stack {
+            --bz-block-stack-inline-align: center !important;
+        }
+
+        // Increase font sizes for tablets
+        .bz-text--variant-heading-2xl {
+            font-size: 3rem !important;
+            line-height: 1.2 !important;
+        }
+
+        .bz-text--variant-body-l {
+            font-size: 1.8rem !important;
+            line-height: 1.5 !important;
+        }
+
+        .bz-button__text {
+            font-size: 1.8rem !important;
+        }
+    }
+
+    // Mobile centering - phones
+    @media (max-width: 480px) {
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90%;
+        padding: 0 1.5rem;
+
+        .bz-block-stack {
+            --bz-block-stack-inline-align: center !important;
+        }
+
+        // Increase font sizes for tablets
+        .bz-text--variant-heading-2xl {
+            font-size: 2rem !important;
+            line-height: 1.2 !important;
+        }
+
+        .bz-text--variant-body-l {
+            font-size: 1.3rem !important;
+            line-height: 1.5 !important;
+        }
+
+        .bz-button__text {
+            font-size: 1.3rem !important;
+        }
+    }
+
+    // Extra small phones
+    @media (max-width: 320px) {
+        width: 95%;
+        padding: 0 0.75rem;
+
+        .bz-block-stack {
+            --bz-block-stack-inline-align: center !important;
+        }
+    }
+}
+
+.bz-errors-page__button {
+    border: none;
+    font-size: 1rem;
+    padding: 0.875rem 2rem;
+    background: rgba(var(--bz-color-white-rgb), 0.04);
+    color: var(--bz-color-white);
+    border-radius: 50px;
+    cursor: pointer;
+
+    &:hover {
+        background: rgba(var(--bz-color-white-rgb), 0.08);
+    }
+}

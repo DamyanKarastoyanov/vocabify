@@ -1,0 +1,19 @@
+const IconRightArrowPlain = (
+    <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+    >
+        <path
+            d="M10 18L15.2929 12.7071C15.6262 12.3738 15.7929 12.2071 15.7929 12C15.7929 11.7929 15.6262 11.6262 15.2929 11.2929L10 6"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+        />
+    </svg>
+);
+
+export default IconRightArrowPlain;

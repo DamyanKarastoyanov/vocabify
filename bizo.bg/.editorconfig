@@ -1,0 +1,36 @@
+# EditorConfig is awesome: https://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+indent_style = space
+indent_size = 4
+trim_trailing_whitespace = true
+line_length_limit_soft = 80
+line_length_limit_hard = 100
+
+class_names = studly
+class_brace_line = next
+constant_names = upper
+true_false_null = lower
+method_names = camel
+method_brace_line = next
+
+always_use_control_braces = true
+else_elseif_line = next
+function_space_after = yes
+class_method_control_brace = next/next/next
+
+[*.php]
+quote_type = single
+closing_php_tag_required = no
+
+[*.md]
+trim_trailing_whitespace = false
+
+[*.yml]
+indent_size = 2

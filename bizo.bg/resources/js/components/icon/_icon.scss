@@ -1,0 +1,154 @@
+@use "../../../scss/tokens/breakpoints" as *;
+
+// ==========================================================================
+// Components - Icon
+// ==========================================================================
+
+:root {
+    --bz-icon-size: var(--bz-space-600);
+    --bz-icon-color: inherit;
+}
+
+.bz-icon {
+    color: var(--bz-icon-color);
+    display: block;
+    flex: none;
+    width: var(--bz-icon-size);
+    height: var(--bz-icon-size);
+
+    // Increase all icon sizes by one step (e.g., 300 -> 400, 400 -> 500, etc.)
+    &[style*="--bz-size-300"] {
+        --bz-icon-size: var(--bz-size-400) !important;
+    }
+
+    &[style*="--bz-size-400"] {
+        --bz-icon-size: var(--bz-size-500) !important;
+    }
+
+    &[style*="--bz-size-500"] {
+        --bz-icon-size: var(--bz-size-600) !important;
+    }
+
+    &[style*="--bz-size-600"] {
+        --bz-icon-size: var(--bz-size-700) !important;
+    }
+
+    &[style*="--bz-size-700"] {
+        --bz-icon-size: var(--bz-size-800) !important;
+    }
+
+    &[style*="--bz-size-800"] {
+        --bz-icon-size: var(--bz-size-900) !important;
+    }
+
+    &[style*="--bz-size-1000"] {
+        --bz-icon-size: var(--bz-size-1200) !important;
+    }
+
+    &[style*="--bz-size-1200"] {
+        --bz-icon-size: var(--bz-size-1400) !important;
+    }
+
+    &[style*="--bz-size-1400"] {
+        --bz-icon-size: var(--bz-size-1600) !important;
+    }
+
+    &[style*="--bz-size-1600"] {
+        --bz-icon-size: var(--bz-size-1800) !important;
+    }
+
+    &[style*="--bz-size-1800"] {
+        --bz-icon-size: var(--bz-size-2000) !important;
+    }
+
+    // Scale down large icons for large desktop (1800px and below)
+    @media (max-width: $bz-breakpoint-2xl) {
+        &[style*="--bz-size-2000"] {
+            --bz-icon-size: var(
+                --bz-size-2000
+            ) !important; // 5rem (80px) - increased from 4.5rem
+        }
+
+        &[style*="--bz-size-2400"] {
+            --bz-icon-size: var(
+                --bz-size-2400
+            ) !important; // 6rem (96px) - increased from 5rem
+        }
+
+        &[style*="--bz-size-2800"] {
+            --bz-icon-size: var(
+                --bz-size-2800
+            ) !important; // 7rem (112px) - increased from 6rem
+        }
+
+        &[style*="--bz-size-3200"] {
+            --bz-icon-size: var(
+                --bz-size-3200
+            ) !important; // 8rem (128px) - increased from 7rem
+        }
+    }
+
+    // Scale down large icons for medium desktop (1520px and below)
+    @media (max-width: $bz-breakpoint-xl) {
+        &[style*="--bz-size-2000"] {
+            --bz-icon-size: var(
+                --bz-size-1800
+            ) !important; // 4.5rem (72px) - increased from 4rem
+        }
+
+        &[style*="--bz-size-2400"] {
+            --bz-icon-size: var(
+                --bz-size-2000
+            ) !important; // 5rem (80px) - increased from 4.5rem
+        }
+
+        &[style*="--bz-size-2800"] {
+            --bz-icon-size: var(
+                --bz-size-2400
+            ) !important; // 6rem (96px) - increased from 5rem
+        }
+
+        &[style*="--bz-size-3200"] {
+            --bz-icon-size: var(
+                --bz-size-2800
+            ) !important; // 7rem (112px) - increased from 6rem
+        }
+    }
+
+    // Scale down large icons for small desktop (1367px and below)
+    @media (max-width: $bz-breakpoint-lg) {
+        &[style*="--bz-size-2000"] {
+            --bz-icon-size: var(
+                --bz-size-1600
+            ) !important; // 4rem (64px) - increased from 3.5rem
+        }
+
+        &[style*="--bz-size-2400"] {
+            --bz-icon-size: var(
+                --bz-size-1800
+            ) !important; // 4.5rem (72px) - increased from 4rem
+        }
+
+        &[style*="--bz-size-2800"] {
+            --bz-icon-size: var(
+                --bz-size-2000
+            ) !important; // 5rem (80px) - increased from 4.5rem
+        }
+
+        &[style*="--bz-size-3200"] {
+            --bz-icon-size: var(
+                --bz-size-2400
+            ) !important; // 6rem (96px) - increased from 5rem
+        }
+    }
+}
+
+.bz-icon__svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    font-size: 0;
+    line-height: 0;
+}

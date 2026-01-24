@@ -1,0 +1,502 @@
+@import "../../../scss/tokens/breakpoints";
+
+.bz-insurance-title-stack {
+    @media (max-width: $bz-breakpoint-md) {
+        --bz-inline-stack-wrap: wrap !important;
+        --bz-inline-stack-align: center !important;
+        flex-direction: column;
+        gap: var(--bz-space-400);
+        align-items: center;
+
+        .bz-text {
+            text-align: center;
+        }
+    }
+}
+
+.mtpl-insurance {
+    &__container {
+        display: flex;
+        flex-direction: column;
+        gap: var(--bz-space-600);
+    }
+
+    &__offers-list {
+        gap: var(--bz-space-600);
+
+        @media (max-width: $bz-breakpoint-md) {
+            gap: var(--bz-space-400);
+        }
+    }
+
+    &__installment-breakdown {
+        color: #808a93;
+    }
+
+    // Offer card animations and base styles
+    &__offer-card {
+        transition:
+            opacity 0.3s ease-in,
+            transform 0.3s ease-in;
+
+        &--entering {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        &--visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        &--selected {
+            .mtpl-insurance__offer-card-default,
+            .mtpl-insurance__offer-card-inner {
+                border: 2px solid var(--bz-color-brand-500);
+                box-shadow: 0 4px 12px rgba(0, 129, 234, 0.25);
+            }
+        }
+
+        // Default card styles
+        &-default {
+            background-color: var(--bz-color-white);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.1);
+            padding: var(--bz-space-600);
+        }
+
+        &-content {
+            width: 100%;
+
+            @media (max-width: $bz-breakpoint-sm) {
+                flex-direction: column;
+                gap: var(--bz-space-400);
+            }
+        }
+
+        &-actions {
+            @media (max-width: $bz-breakpoint-xs) {
+                flex-direction: column;
+                gap: var(--bz-space-300);
+            }
+        }
+
+        // Best offer (cheapest) styles
+        &--best {
+            .mtpl-insurance__offer-card-best-wrapper {
+                background-color: var(--bz-color-brand-500);
+                border-radius: 16px;
+                overflow: hidden;
+                display: flex;
+                align-items: center;
+                padding-left: 184px;
+                padding-right: 4px;
+                padding-top: 4px;
+                padding-bottom: 4px;
+                position: relative;
+
+                @media (max-width: $bz-breakpoint-sm) {
+                    padding-left: 120px;
+                }
+
+                @media (max-width: $bz-breakpoint-xs) {
+                    padding-left: var(--bz-space-400);
+                    padding-top: 80px;
+                    flex-direction: column;
+                }
+            }
+        }
+
+        &-mascot {
+            position: absolute;
+            left: 5px;
+            top: -10px;
+            width: 84px;
+            height: 143px;
+
+            @media (max-width: $bz-breakpoint-md) {
+                position: absolute;
+                left: var(--bz-space-400);
+                top: -5px;
+                width: 75px;
+                height: 90px;
+                z-index: 1;
+            }
+        }
+
+        &-mascot-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        &-badge {
+            position: absolute;
+            left: 70px;
+            top: 46px;
+            color: var(--bz-color-white);
+            font-family: "Segoe UI", sans-serif;
+            font-weight: 900;
+            font-size: 14px;
+            line-height: 18px;
+            font-style: italic;
+            text-transform: uppercase;
+            display: flex;
+            flex-direction: column;
+            text-align: right;
+            white-space: nowrap;
+
+            @media (max-width: $bz-breakpoint-sm) {
+                left: 55px;
+                top: 20px;
+                font-size: 11px;
+            }
+
+            @media (max-width: $bz-breakpoint-xs) {
+                left: 50%;
+                transform: translateX(-50%);
+                top: 70px;
+                text-align: center;
+            }
+        }
+
+        &-inner {
+            flex: 1;
+            background-color: var(--bz-color-white);
+            border-radius: 14px;
+            padding: var(--bz-space-500);
+            box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.15);
+
+            @media (max-width: $bz-breakpoint-sm) {
+                .bz-inline-stack {
+                    flex-direction: column;
+                    gap: var(--bz-space-300);
+                }
+            }
+        }
+
+        // Button styles
+        &-button {
+            border: 1px solid var(--bz-color-brand-500) !important;
+            border-radius: 12px !important;
+            padding: var(--bz-space-300) var(--bz-space-600) !important;
+            background-color: transparent !important;
+
+            .bz-text,
+            span {
+                color: var(--bz-color-text-primary) !important;
+                font-weight: 500 !important;
+                font-size: 16px !important;
+            }
+
+            &:hover {
+                background-color: var(--bz-color-brand-100) !important;
+            }
+        }
+    }
+
+    // Skeleton loading state
+    &__offer-card-skeleton {
+        background: linear-gradient(
+            90deg,
+            #f0f0f0 25%,
+            #e0e0e0 50%,
+            #f0f0f0 75%
+        );
+        background-size: 200% 100%;
+        animation: shimmer 1.5s infinite;
+        border-radius: 16px;
+        height: 80px;
+
+        &--price {
+            height: 80px;
+        }
+    }
+
+    // Payment option styles
+    &__payment-option {
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+
+        &:hover {
+            background-color: rgba(0, 120, 212, 0.05);
+        }
+
+        input[type="radio"] {
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+        }
+
+        &--selected {
+            border: 2px solid var(--bz-color-brand-500);
+            box-shadow: 0 2px 8px rgba(0, 120, 212, 0.2);
+        }
+    }
+
+    &__success-page-holder {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 400px;
+    }
+
+    &__success-policy-number-holder {
+        background-color: rgba(0, 120, 212, 0.1);
+        border-radius: 8px;
+        display: inline-block;
+    }
+
+    &__success-text-details-holder {
+        text-align: center;
+    }
+}
+
+// Shimmer animation keyframes
+@keyframes shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+// Responsive adjustments
+@media (max-width: $bz-breakpoint-sm) {
+    .mtpl-insurance {
+        &__offer-card {
+            &--entering,
+            &--visible {
+                transform: none; // Disable transform on mobile for performance
+            }
+        }
+    }
+}
+
+#mtpl-insurance__vehicle-data-form {
+    > .bz-block-stack > .bz-inline-stack > .bz-block-stack:last-child {
+        @media (max-width: $bz-breakpoint-sm) {
+            display: none;
+        }
+    }
+}
+
+.mtpl-insurance__success-page-holder {
+    .bz-surface {
+        width: 100%;
+    }
+
+    .mtpl-insurance__success-holder {
+        padding: 40px;
+    }
+
+    .mtpl-insurance__success-text-details-holder-secondary {
+        text-align: left;
+
+        .bz-text {
+            color: #808a93;
+        }
+    }
+
+    .bz-notification-card {
+        display: flex;
+        align-items: stretch;
+        background-color: #ffffff;
+        border: 1px solid #e6e8e9;
+        border-radius: 12px;
+        overflow: hidden;
+        width: 100%;
+
+        &__accent {
+            width: 2px;
+            flex-shrink: 0;
+            background-color: #0081ea;
+        }
+
+        &__content {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding-left: 16px;
+            flex: 1;
+        }
+
+        &__text {
+            flex: 1;
+            font-family: "Segoe UI", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 24px;
+            color: #1f1f1f;
+        }
+
+        .bz-icon {
+            flex-shrink: 0;
+        }
+    }
+}
+
+// Mobile/Tablet Offer Card Styles
+.mtpl-insurance__offer-card-mobile {
+    transition:
+        opacity 0.3s ease-in,
+        transform 0.3s ease-in;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+    &--entering {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    &--visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    &--selected {
+        border: 2px solid var(--bz-color-brand-500);
+        box-shadow: 0 4px 12px rgba(0, 129, 234, 0.25);
+    }
+
+    // Best offer (cheapest) - use wrapper strategy like desktop
+    &--best {
+        .mtpl-insurance__offer-card-mobile-best-wrapper {
+            background-color: var(--bz-color-brand-500);
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            padding: 4px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mtpl-insurance__offer-card-mobile-body {
+            padding: var(--bz-space-500);
+        }
+    }
+
+    &-best-wrapper {
+        display: none;
+    }
+
+    &--best &-best-wrapper {
+        display: flex;
+    }
+
+    &-header {
+        display: none;
+    }
+
+    &--best &-header {
+        display: flex;
+        background-color: var(--bz-color-brand-500);
+        padding: var(--bz-space-400) var(--bz-space-600);
+        align-items: center;
+        justify-content: flex-end;
+        position: relative;
+        min-height: 48px;
+    }
+
+    &-mascot {
+        position: absolute;
+        left: var(--bz-space-400);
+        top: -5px;
+        width: 75px;
+        height: 90px;
+        z-index: 1;
+    }
+
+    &-mascot-image {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    &-badge-text {
+        color: var(--bz-color-white);
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-left: auto;
+        z-index: 2;
+    }
+
+    &-body {
+        background-color: var(--bz-color-white);
+        padding: var(--bz-space-600);
+        border-radius: 16px;
+        z-index: 2;
+
+        .mtpl-insurance__offer-card-mobile--best & {
+            border-radius: 14px;
+            flex: 1;
+        }
+    }
+
+    &-company-name {
+        text-align: right;
+        text-transform: capitalize;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+
+        // Override Text component's font-family variable
+        --bz-text-font-family: "Poppins", sans-serif;
+        font-family: "Poppins", sans-serif !important;
+    }
+
+    &-logo {
+        justify-content: flex-end;
+
+        &-main {
+            color: var(--bz-color-text-primary);
+            text-align: right;
+        }
+    }
+
+    &-logo-line {
+        height: 2px;
+        background-color: var(--bz-color-brand-500);
+        width: 100%;
+        margin-top: 2px;
+    }
+
+    &-price-breakdown {
+        color: #808a93;
+        text-align: left;
+    }
+
+    &-total-price {
+        color: var(--bz-color-text-primary);
+        text-align: left;
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    .bz-button {
+        padding: var(--bz-space-300) var(--bz-space-600) !important;
+        border: 1px solid var(--bz-color-brand-500) !important;
+        border-radius: 12px !important;
+        background-color: var(--bz-color-white) !important;
+        position: relative;
+
+        .bz-button__text {
+            color: var(--bz-color-text-primary) !important;
+            font-weight: 500 !important;
+            font-size: 16px !important;
+        }
+
+        &:hover {
+            background-color: var(--bz-color-brand-100) !important;
+        }
+    }
+
+    // Ensure text hides when loading
+    .bz-button--loading .bz-button__text {
+        opacity: 0 !important;
+    }
+}

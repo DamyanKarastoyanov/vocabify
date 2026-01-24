@@ -1,0 +1,207 @@
+@use "../../../scss/tokens/breakpoints" as *;
+
+// ==========================================================================
+// Components - Text
+// ==========================================================================
+
+:root {
+    --bz-text-font-family: var(--bz-font-family-sans);
+    --bz-text-font-size: initial;
+    --bz-text-font-weight: initial;
+    --bz-text-line-height: var(--bz-line-height-default);
+    --bz-text-line-height: var(--bz-line-height-default);
+    --bz-text-transform: inherit;
+    --bz-text-color: inherit;
+}
+
+.bz-text {
+    color: var(--bz-text-color);
+    font-family: var(--bz-text-font-family);
+    font-size: var(--bz-text-font-size);
+    font-weight: var(--bz-text-font-weight);
+    line-height: var(--bz-text-line-height);
+    text-align: inherit;
+    text-transform: var(--bz-text-transform);
+
+    &--variant-body-s {
+        --bz-text-font-size: var(--bz-font-size-s);
+        --bz-text-font-weight: var(--bz-font-weight-regular);
+        --bz-text-line-height: var(--bz-line-height-body-s);
+        --bz-text-line-height: var(--bz-line-height-body-s);
+    }
+
+    &--variant-body-m {
+        --bz-text-font-size: var(--bz-font-size-m);
+        --bz-text-font-weight: var(--bz-font-weight-regular);
+        --bz-text-line-height: var(--bz-line-height-body-m);
+        --bz-text-font-weight: var(--bz-font-weight-regular);
+        --bz-text-line-height: var(--bz-line-height-body-m);
+    }
+
+    &--variant-body-l {
+        --bz-text-font-size: var(--bz-font-size-xl);
+        --bz-text-font-weight: var(--bz-font-weight-regular);
+        --bz-text-line-height: var(--bz-line-height-body-l);
+        --bz-text-font-size: var(--bz-font-size-xl);
+        --bz-text-font-weight: var(--bz-font-weight-regular);
+        --bz-text-line-height: var(--bz-line-height-body-l);
+    }
+
+    &--variant-heading-s {
+        --bz-text-font-family: var(--bz-font-family-heading);
+        --bz-text-font-family: var(--bz-font-family-heading);
+        --bz-text-font-size: var(--bz-font-size-l);
+        --bz-text-font-weight: var(--bz-font-weight-medium);
+        --bz-text-line-height: var(
+            --bz-line-height-heading-s
+        ); // 1.5 (24 / 16) - matches Figma h5
+    }
+
+    &--variant-heading-m {
+        --bz-text-font-family: var(--bz-font-family-heading);
+        --bz-text-font-family: var(--bz-font-family-heading);
+        --bz-text-font-size: var(--bz-font-size-xl);
+        --bz-text-font-weight: var(--bz-font-weight-semibold);
+        --bz-text-line-height: var(--bz-line-height-heading-s);
+        --bz-text-font-weight: var(--bz-font-weight-semibold);
+        --bz-text-line-height: var(--bz-line-height-heading-s);
+    }
+
+    &--variant-heading-l {
+        --bz-text-font-family: var(--bz-font-family-heading);
+        --bz-text-font-size: var(--bz-font-size-2xl-fluid); // Use fluid version
+        --bz-text-font-weight: var(--bz-font-weight-bold);
+        --bz-text-line-height: var(--bz-line-height-heading-m);
+    }
+
+    &--variant-heading-xl {
+        --bz-text-font-family: var(--bz-font-family-heading);
+        --bz-text-font-size: var(--bz-font-size-3xl-fluid); // Use fluid version
+        --bz-text-font-weight: var(--bz-font-weight-semibold);
+        --bz-text-line-height: var(--bz-line-height-heading-l);
+
+        // Scale down for large desktop (1800px and below)
+        @media (max-width: $bz-breakpoint-3xl) {
+            --bz-text-font-size: clamp(
+                1.5rem,
+                2vw + 0.5rem,
+                2rem
+            ); // 24px - 32px max (reduced from 40px)
+        }
+
+        // Scale down for medium desktop (1520px and below)
+        @media (max-width: $bz-breakpoint-2xl) {
+            --bz-text-font-size: clamp(
+                1.5rem,
+                1.75vw + 0.5rem,
+                1.875rem
+            ); // 24px - 30px max
+        }
+
+        // Scale down for small desktop (1367px and below)
+        @media (max-width: $bz-breakpoint-xl) {
+            --bz-text-font-size: clamp(
+                1.375rem,
+                1.5vw + 0.5rem,
+                1.75rem
+            ); // 22px - 28px max
+        }
+
+        // Fixed size for tablet and mobile (1024px and below)
+        @media (max-width: $bz-breakpoint-md) {
+            --bz-text-font-size: 1.75rem; // 28px
+        }
+    }
+
+    &--variant-heading-2xl {
+        --bz-text-font-family: var(--bz-font-family-heading);
+        --bz-text-font-size: var(--bz-font-size-4xl-fluid); // Use fluid version
+        --bz-text-font-weight: var(--bz-font-weight-semibold);
+        --bz-text-line-height: var(--bz-line-height-heading-xl);
+
+        // Scale down for large desktop (1800px and below)
+        @media (max-width: $bz-breakpoint-3xl) {
+            --bz-text-font-size: clamp(
+                2rem,
+                2.5vw + 0.5rem,
+                2.5rem
+            ); // 32px - 40px max (reduced from 56px)
+        }
+
+        // Scale down for medium desktop (1520px and below)
+        @media (max-width: $bz-breakpoint-2xl) {
+            --bz-text-font-size: clamp(
+                1.875rem,
+                2.25vw + 0.5rem,
+                2.25rem
+            ); // 30px - 36px max
+        }
+
+        // Scale down for small desktop (1367px and below)
+        @media (max-width: $bz-breakpoint-xl) {
+            --bz-text-font-size: clamp(
+                1.75rem,
+                2vw + 0.5rem,
+                2rem
+            ); // 28px - 32px max
+        }
+    }
+
+    &--align-start {
+        text-align: left;
+    }
+
+    &--align-center {
+        text-align: center;
+    }
+
+    &--align-end {
+        text-align: right;
+    }
+
+    &--align-justify {
+        text-align: justify;
+    }
+
+    &--font-weight-light {
+        --bz-text-font-weight: var(--bz-font-weight-light);
+    }
+
+    &--font-weight-regular {
+        --bz-text-font-weight: var(--bz-font-weight-regular);
+    }
+
+    &--font-weight-medium {
+        --bz-text-font-weight: var(--bz-font-weight-medium);
+    }
+
+    &--font-weight-semibold {
+        --bz-text-font-weight: var(--bz-font-weight-semibold);
+    }
+
+    &--font-weight-bold {
+        --bz-text-font-weight: var(--bz-font-weight-bold);
+    }
+
+    &--transform-capitalize {
+        --bz-text-transform: var(--bz-text-transform-capitalize);
+    }
+
+    &--transform-uppercase {
+        --bz-text-transform: var(--bz-text-transform-uppercase);
+    }
+
+    &--transform-lowercase {
+        --bz-text-transform: var(--bz-text-transform-lowercase);
+    }
+
+    &--truncate {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    &--nowrap {
+        white-space: nowrap;
+    }
+}

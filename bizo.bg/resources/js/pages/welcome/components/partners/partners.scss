@@ -1,0 +1,152 @@
+@use "../../../../../scss/tokens/breakpoints" as *;
+
+// ==========================================================================
+// Welcome - Partners
+// ==========================================================================
+
+.bz-partners {
+    background: var(--bz-color-surface-0);
+    padding-top: 120px;
+    padding-bottom: 120px; // Extra large desktop - increased from 100px
+
+    // Scale down for large desktop (1800px and below)
+    @media (max-width: $bz-breakpoint-3xl) {
+        padding-bottom: 110px; // Increased bottom padding
+        padding-top: 110px;
+    }
+
+    // Scale down for medium desktop (1520px and below)
+    @media (max-width: $bz-breakpoint-2xl) {
+        padding-bottom: 100px; // Increased bottom padding
+        padding-top: 100px;
+    }
+
+    // Scale down for small desktop (1367px and below)
+    @media (max-width: $bz-breakpoint-xl) {
+        padding-bottom: 90px; // Increased bottom padding
+        padding-top: 90px;
+    }
+
+    // Scale down for tablet (1024px and below)
+    @media (max-width: $bz-breakpoint-md) {
+        padding-bottom: 70px; // tablet size
+        padding-top: 70px;
+    }
+
+    // Mobile styles (768px and below)
+    @media (max-width: $bz-breakpoint-sm) {
+        width: 100%;
+        padding-bottom: 48px; // From Figma
+        padding-left: 16px;
+        padding-right: 16px;
+        padding-top: 48px;
+    }
+
+    // Extra small mobile (480px and below)
+    @media (max-width: $bz-breakpoint-xs) {
+        padding-bottom: 32px;
+        padding-left: 12px;
+        padding-right: 12px;
+        padding-top: 32px;
+    }
+
+    &__container {
+        width: 76.5rem; // 1224px - extra large desktop
+        margin: 0 auto;
+
+        // Scale down for large desktop (1800px and below)
+        @media (max-width: $bz-breakpoint-3xl) {
+            width: 64rem; // 1024px - reduced from 1088px
+        }
+
+        // Scale down for medium desktop (1520px and below)
+        @media (max-width: $bz-breakpoint-2xl) {
+            width: 60rem; // 960px - reduced from 1024px
+        }
+
+        // Scale down for small desktop (1367px and below)
+        @media (max-width: $bz-breakpoint-xl) {
+            width: 48rem; // 768px - reduced from 832px
+        }
+
+        // Scale down for tablet (1024px and below)
+        @media (max-width: $bz-breakpoint-md) {
+            width: 40rem; // 640px - tablet size
+        }
+
+        // Mobile styles (768px and below)
+        @media (max-width: $bz-breakpoint-sm) {
+            width: 100%;
+            padding: 0;
+            gap: 16px; // From Figma
+            overflow-x: auto;
+            flex-wrap: nowrap;
+            justify-content: flex-start;
+            -webkit-overflow-scrolling: touch; // Smooth scrolling on iOS
+            scrollbar-width: none; // Hide scrollbar on Firefox
+            -ms-overflow-style: none; // Hide scrollbar on IE/Edge
+
+            &::-webkit-scrollbar {
+                display: none; // Hide scrollbar on WebKit
+            }
+        }
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--bz-space-600);
+        flex-wrap: wrap;
+    }
+
+    &__item {
+        background: var(--bz-color-surface-100);
+        border-radius: var(--bz-border-radius-200);
+        padding: 18px;
+        flex: 1;
+        min-width: 170px;
+        height: 72px; // Reduced from 96px
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+
+        // Make the 5th item (second row) match the width of first row items
+        // With 4 items in first row and 3 gaps: each item = (100% - 3 * gap) / 4
+        &:nth-child(5) {
+            flex: 0 1 calc(25% - 1.125rem); // 25% minus 3/4 of gap (1.5rem * 3 / 4 = 1.125rem)
+            max-width: calc(25% - 1.125rem);
+        }
+
+        // Scale down for tablet (1024px and below)
+        @media (max-width: $bz-breakpoint-md) {
+            max-width: var(--partner-width, 170px);
+        }
+
+        // Mobile styles (768px and below)
+        @media (max-width: $bz-breakpoint-sm) {
+            flex: 0 0 152px; // From Figma - fixed width for horizontal scroll
+            min-width: 152px;
+            height: 72px; // From Figma
+            padding: 10px; // From Figma
+            border-radius: 8px; // From Figma
+
+            &:nth-child(5) {
+                flex: 0 0 152px;
+                max-width: 152px;
+            }
+        }
+    }
+
+    &__logo {
+        width: var(--partner-width, 150px);
+        height: var(--partner-height, 50px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+    }
+}

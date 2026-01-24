@@ -1,0 +1,49 @@
+// ==========================================================================
+// Tokens - Colors
+// ==========================================================================
+
+:root {
+    /* Brand */
+    --vf-color-brand-100: #fef9c3;
+    --vf-color-brand-200: #fef08a;
+    --vf-color-brand-300: #fde047;
+    --vf-color-brand-400: #facc15;
+    --vf-color-brand-500: #facc15;
+    --vf-color-brand-600: #eab308;
+    --vf-color-brand-700: #ca8a04;
+    --vf-color-brand-800: #a16207;
+    --vf-color-brand-900: #854d0e;
+
+    /* Text */
+    --vf-color-text-primary: #020617;
+    --vf-color-text-secondary: #475569;
+    --vf-color-text-muted: #64748b;
+    --vf-color-text-inverse: #f9fafb;
+
+    /* Surface */
+    --vf-color-surface-0: #ffffff;
+    --vf-color-surface-50: #f8fafc;
+    --vf-color-surface-100: #f1f5f9;
+    --vf-color-surface-200: #e2e8f0;
+    --vf-color-surface-800: #0f172a;
+    --vf-color-surface-900: #020617;
+
+    /* Border */
+    --vf-color-border-subtle: #e5e7eb;
+    --vf-color-border-default: #cbd5e1;
+
+    /* Semantic */
+    --vf-color-success-500: #22c55e;
+    --vf-color-success-100: #dcfce7;
+    --vf-color-danger-500: #ef4444;
+    --vf-color-danger-100: #fee2e2;
+    --vf-color-warning-500: #facc15;
+    --vf-color-warning-100: #fef9c3;
+    --vf-color-info-500: #38bdf8;
+    --vf-color-info-100: #e0f2fe;
+
+    /* Aliases */
+    --vf-color-primary: var(--vf-color-brand-500);
+    --vf-color-white: #ffffff;
+    --vf-color-black: #000000;
+}

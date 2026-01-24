@@ -1,0 +1,16 @@
+.bz-content-card {
+    --bz-card-background-color: var(--bz-color-gray-100);
+    --bz-card-border-radius: var(--bz-border-radius-100);
+    --bz-card-padding: var(--bz-space-200);
+
+    background-color: var(--bz-card-background-color);
+    border-radius: var(--bz-card-border-radius);
+    padding: var(--bz-card-padding);
+    position: relative;
+    overflow: hidden;
+
+    > * {
+        position: relative;
+        z-index: 1;
+    }
+}

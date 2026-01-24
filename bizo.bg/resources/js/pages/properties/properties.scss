@@ -1,0 +1,196 @@
+@use "../../../scss/tokens/breakpoints" as *;
+
+.bz-properties {
+    flex-direction: row;
+
+    @media (max-width: $bz-breakpoint-md) {
+        flex-direction: column-reverse;
+    }
+
+    &-form {
+        &-fields {
+            .bz-input-field-holder {
+                min-width: 200px;
+            }
+
+            .bz-inline-stack {
+                .bz-block-stack {
+                    flex: 1;
+                }
+            }
+
+            // Make fields wrap only on mobile (not tablet)
+            @media (max-width: $bz-breakpoint-sm) {
+                .bz-inline-stack {
+                    flex-direction: column;
+                    gap: var(--bz-space-300);
+
+                    .bz-block-stack {
+                        flex: 1 1 100%;
+                        min-width: 100%;
+                    }
+                }
+            }
+        }
+
+        .bz-box {
+            .bz-button--variant-primary {
+                background-color: var(--bz-color-system-error);
+            }
+        }
+
+        // Mobile and tablet padding adjustments
+        @media (max-width: $bz-breakpoint-md) {
+            .bz-box.bz-properties-list {
+                padding: var(--bz-space-600) !important; // 24px
+
+                > .bz-block-stack {
+                    gap: var(--bz-space-600);
+
+                    // Make header wrap on mobile
+                    > .bz-inline-stack:first-child {
+                        flex-wrap: wrap;
+                        gap: var(--bz-space-400);
+                    }
+                }
+            }
+        }
+    }
+
+    &-ads {
+        flex: 1;
+
+        .bz-box {
+            height: 100%;
+
+            > .bz-button {
+                width: 100%;
+                background: var(--bz-color-blue-200);
+                color: var(--bz-color-white);
+                padding: var(--bz-space-600);
+            }
+        }
+
+        @media (max-width: $bz-breakpoint-md) {
+            align-self: flex-end;
+        }
+    }
+}
+
+.bz-properties-form-actions-delete-button-group {
+    .bz-button:last-child {
+        background-color: var(--bz-color-system-error);
+    }
+}
+
+.bz-property-single-view-card {
+    display: flex;
+    gap: 48px;
+    align-items: stretch;
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.1);
+    width: 100%;
+
+    &__left {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+        width: 296px;
+        flex-shrink: 0;
+        padding: 40px;
+
+        .bz-inline-stack {
+            align-items: center;
+        }
+    }
+
+    &__right {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        background-color: #f8f8f8;
+        border: 2px solid #ffffff;
+        border-radius: 16px;
+        padding: 40px;
+        min-height: 100%;
+    }
+
+    @media (max-width: $bz-breakpoint-md) {
+        flex-direction: column;
+        gap: 0;
+
+        &__left {
+            width: 100%;
+            padding: var(--bz-space-400);
+            align-items: center;
+
+            .bz-inline-stack {
+                align-items: center;
+            }
+
+            > .bz-block-stack {
+                gap: var(--bz-space-400);
+                align-items: center;
+
+                > .bz-block-stack {
+                    gap: var(--bz-space-400);
+                    align-items: center;
+                }
+            }
+
+            .bz-text--variant-body-s {
+                font-size: 14px;
+            }
+        }
+
+        &__right {
+            padding: var(--bz-space-400);
+        }
+    }
+}
+
+.bz-property-details-header {
+    padding-bottom: 16px;
+    border-bottom: none;
+}
+
+.bz-property-detail-row {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.bz-property-detail-separator {
+    flex: 1;
+    height: 17px;
+    background-image: repeating-linear-gradient(
+        to right,
+        #808a93 0,
+        #808a93 2px,
+        transparent 2px,
+        transparent 6px
+    );
+    background-size: 8px 1px;
+    background-repeat: repeat-x;
+    background-position: center;
+    min-width: 0;
+    top: 3px;
+    position: relative;
+}
+
+@media (max-width: $bz-breakpoint-md) {
+    .bz-surface > .bz-box {
+        --bz-box-padding-block-start: var(
+            --bz-space-600
+        ) !important; // 1.5rem (24px) - reduced from default
+        --bz-box-padding-block-end: var(--bz-space-600) !important;
+        --bz-box-padding-inline-start: var(--bz-space-600) !important;
+        --bz-box-padding-inline-end: var(--bz-space-600) !important;
+
+        > .bz-block-stack {
+            gap: var(--bz-space-600);
+        }
+    }
+}

@@ -1,0 +1,203 @@
+@use "../../../scss/tokens/breakpoints" as *;
+
+.bz-step-holder--desktop {
+    display: flex !important;
+    width: 100% !important;
+    gap: var(--bz-space-1400) !important;
+    align-items: flex-start !important;
+
+    & > * {
+        &:first-child {
+            flex: 1 1 0% !important;
+            min-width: 0 !important;
+            width: 100% !important;
+        }
+
+        &:last-child {
+            width: 300px !important;
+            position: sticky;
+            top: var(--bz-app-bar-height, 0px);
+            align-self: flex-start;
+        }
+    }
+}
+
+.bz-insurance-form-holder {
+    .bz-input-field-holder {
+        min-width: 170px;
+
+        .bz-box:has(.bz-checkbox) {
+            align-content: center;
+        }
+    }
+
+    .bz-inline-stack:has(.bz-input-field-holder > .bz-text) {
+        .bz-input-field-holder {
+            &:has(.bz-checkbox) {
+                justify-content: center;
+            }
+        }
+    }
+
+    .bz-inline-stack {
+        .bz-block-stack {
+            flex: 1;
+        }
+    }
+
+    // Ensure default padding is maintained for desktop (no overrides)
+    .bz-surface .bz-box {
+        // Padding comes from component props (typically padding="1000" = 2.5rem/40px)
+        // No overrides needed - let it use the default
+    }
+}
+
+.bz-insurance-offer-holder-container--desktop {
+    display: flex;
+    flex-direction: column;
+    gap: var(--bz-space-400);
+}
+
+.bz-insurance-offer-holder-surface--desktop {
+    position: sticky;
+    align-self: flex-start;
+    width: 100%;
+    background-color: var(--bz-color-brand-100);
+    border: none;
+    border-radius: var(--bz-border-radius-400);
+
+    .bz-insurance-data-holder {
+        cursor: default;
+        --bz-box-padding-block-start: 0;
+        --bz-box-padding-block-end: 0;
+        --bz-box-padding-inline-start: 0;
+        --bz-box-padding-inline-end: 0;
+
+        img {
+            width: var(--bz-size-1800);
+        }
+
+        .mobile-caret {
+            display: none;
+        }
+    }
+
+    .bz-insurance-offer-holder {
+        padding-inline: var(--bz-space-800);
+        padding-bottom: 0;
+
+        > .bz-box {
+            --bz-box-padding-block-start: 0 !important;
+            --bz-box-padding-block-end: 0 !important;
+            --bz-box-padding-inline-start: 0 !important;
+            --bz-box-padding-inline-end: 0 !important;
+        }
+    }
+}
+
+.bz-insurance-data-holder {
+    .bz-text--variant-body-m {
+        --bz-text-color: rgb(var(--bz-color-blue-500-rgb), 0.5);
+    }
+}
+
+.bz-insurance-info-card-container {
+    position: relative;
+}
+
+.bz-insurance-info-card {
+    background-color: var(--bz-color-warning-100);
+    border-radius: var(--bz-border-radius-400);
+    padding: var(--bz-space-800);
+    position: relative;
+    width: 100%;
+
+    .bz-text {
+        position: relative;
+        z-index: 1;
+        color: var(--bz-color-text-primary);
+        font-size: var(--bz-font-size-m);
+        line-height: var(--bz-space-600);
+        font-weight: var(--bz-font-weight-regular);
+    }
+}
+
+.bz-insurance-info-card-image {
+    position: relative;
+    left: 39px;
+    bottom: 22px;
+    width: 195px;
+    height: 241px;
+    aspect-ratio: 150 / 223;
+    pointer-events: none;
+
+    img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+}
+
+.bz-dots-separator {
+    width: 100%;
+    padding-block: var(--bz-space-200);
+    overflow: visible;
+    position: relative;
+    height: 8px; // Increased to accommodate circular dots
+    display: block;
+
+    // Dotted line in the middle (using radial gradient for circular dots)
+    background-image: radial-gradient(
+        circle,
+        var(--bz-color-white) 4px,
+        transparent 4px
+    );
+    background-position: center;
+    background-size: 16px 8px; // 16px spacing between dots, 8px height
+    background-repeat: repeat-x;
+    background-position-x: 20px; // Start after left dot
+    background-position-y: center;
+    margin-block: 10px;
+
+    // Large left dot
+    &::before {
+        content: "";
+        position: absolute;
+        left: -20px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 20px;
+        height: 20px;
+        border-radius: 100%;
+        background-color: var(--bz-color-white);
+    }
+
+    // Large right dot
+    &::after {
+        content: "";
+        position: absolute;
+        right: 0px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 20px;
+        height: 20px;
+        border-radius: 100%;
+        background-color: var(--bz-color-white);
+    }
+}
+
+.bz-insurance-offer-holder .bz-dots-separator {
+    width: calc(100% + 2 * var(--bz-space-800));
+    margin-inline: calc(-1 * var(--bz-space-800));
+    padding-block: var(--bz-space-200);
+
+    // Adjust background to account for extended width
+    background-position-x: 20px;
+    background-position-y: center;
+
+    // Right dot positioned at the extended edge
+    &::after {
+        right: calc(-1 * var(--bz-space-800));
+    }
+}

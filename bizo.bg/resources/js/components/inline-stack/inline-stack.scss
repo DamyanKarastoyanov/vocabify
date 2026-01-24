@@ -1,0 +1,19 @@
+// ==========================================================================
+// Components - Inline Stack
+// ==========================================================================
+
+:root {
+    --bz-inline-stack-gap: var(--bz-space-0);
+    --bz-inline-stack-row-gap: var(--bz-space-0);
+    --bz-inline-stack-align: start;
+    --bz-inline-stack-block-align: stretch;
+    --bz-inline-stack-wrap: wrap;
+}
+
+.bz-inline-stack {
+    display: flex;
+    gap: var(--bz-inline-stack-row-gap) var(--bz-inline-stack-gap);
+    flex-wrap: var(--bz-inline-stack-wrap);
+    justify-content: var(--bz-inline-stack-align);
+    align-items: var(--bz-inline-stack-block-align);
+}

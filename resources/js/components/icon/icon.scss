@@ -1,0 +1,28 @@
+@use "../../../scss/tokens/breakpoints" as *;
+
+// ==========================================================================
+// Components - Icon
+// ==========================================================================
+
+:root {
+    --vf-icon-size: var(--vf-space-600);
+    --vf-icon-color: inherit;
+}
+
+.vf-icon {
+    color: var(--vf-icon-color);
+    display: block;
+    flex: none;
+    width: var(--vf-icon-size);
+    height: var(--vf-icon-size);
+}
+
+.vf-icon__svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    font-size: 0;
+    line-height: 0;
+}

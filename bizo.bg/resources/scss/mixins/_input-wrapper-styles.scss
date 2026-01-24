@@ -1,0 +1,118 @@
+@use "../tokens/breakpoints" as *;
+
+:root {
+    --bz-text-input-gap: var(--bz-space-300);
+    --bz-text-input-border: 1px;
+    --bz-text-input-height: calc(
+        var(--bz-size-950) - 2 * var(--bz-text-input-border)
+    );
+    --bz-text-input-padding-inline: var(--bz-space-400);
+    --bz-text-input-padding-block: var(--bz-space-300);
+    --bz-text-input-border-color: var(--bz-color-border-subtle);
+    --bz-text-input-border-radius: var(--bz-border-radius-300);
+    --bz-text-input-background-color: var(--bz-color-surface-100);
+    --bz-text-input-font-size: var(--bz-font-size-m);
+    --bz-text-input-font-weight: var(--bz-font-weight-regular);
+    --bz-text-input-line-height: var(--bz-space-600);
+    --bz-text-input-color: var(--bz-color-text-primary);
+    --bz-text-input-placeholder-color: var(--bz-color-text-secondary);
+}
+
+@mixin input-wrapper-styles($selector) {
+    display: flex;
+    align-items: center;
+    gap: var(--bz-text-input-gap);
+    font-size: var(--bz-text-input-font-size);
+    font-weight: var(--bz-text-input-font-weight);
+    line-height: var(--bz-text-input-line-height);
+    color: var(--bz-text-input-color);
+    background-color: var(--bz-text-input-background-color);
+    padding-inline: var(--bz-text-input-padding-inline);
+    padding-block: var(--bz-text-input-padding-block);
+    border: solid var(--bz-text-input-border) var(--bz-text-input-border-color);
+    border-radius: var(--bz-text-input-border-radius);
+    width: 100%;
+    min-height: auto;
+
+    &:focus-within:not(#{$selector}--invalid):not(&--disabled),
+    &:hover:not(#{$selector}--invalid):not(&--disabled) {
+        --bz-text-input-border-color: var(--bz-color-border-subtle);
+    }
+
+    &--invalid {
+        --bz-text-input-border-color: var(--bz-color-system-error);
+    }
+
+    &--disabled {
+        --bz-text-input-background-color: var(--bz-color-surface-100);
+        --bz-text-input-color: var(--bz-color-text-secondary);
+        --bz-text-input-placeholder-color: var(--bz-color-text-secondary);
+        --bz-text-input-border-color: var(--bz-color-surface-100);
+        pointer-events: none;
+        opacity: 1;
+
+        #{$selector}__input {
+            opacity: 0.5;
+        }
+
+        .bz-icon {
+            --bz-icon-color: var(--bz-color-text-secondary) !important;
+        }
+    }
+}
+
+@mixin input-control-styles($selector) {
+    flex: 1 0 0;
+    border: none;
+    color: var(--bz-text-input-color);
+    background: none;
+    font-size: var(--bz-text-input-font-size);
+    line-height: var(--bz-text-input-line-height);
+    font-weight: var(--bz-text-input-font-weight);
+    padding: 0;
+    min-width: 0;
+
+    @if $selector !=& {
+        #{$selector}[type="number"],
+        #{$selector}::-webkit-outer-spin-button,
+        #{$selector}::-webkit-inner-spin-button {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: textfield;
+        }
+
+        #{$selector}::placeholder {
+            opacity: 1;
+            color: var(--bz-text-input-placeholder-color);
+        }
+
+        #{$selector}:focus {
+            outline: none;
+        }
+
+        #{$selector}:disabled {
+            background: none;
+        }
+    } @else {
+        &[type="number"],
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: textfield;
+        }
+
+        &::placeholder {
+            opacity: 1;
+            color: var(--bz-text-input-placeholder-color);
+        }
+
+        &:focus {
+            outline: none;
+        }
+
+        &:disabled {
+            background: none;
+        }
+    }
+}

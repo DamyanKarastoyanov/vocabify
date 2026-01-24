@@ -1,0 +1,39 @@
+// ==========================================================================
+// Components - Form Label
+// ==========================================================================
+
+:root {
+    --bz-form-label-color: var(--bz-color-text-secondary);
+    --bz-form-label-font-size: var(--bz-font-size-l);
+    --bz-from-label-line-height: var(--bz-line-height);
+    --bz-form-label-font-weight: var(--bz-font-weight-regular);
+    --bz-form-label-asterisk-color: var(--bz-color-blue-200);
+}
+
+.bz-form-label {
+    font-size: var(--bz-form-label-font-size);
+    font-weight: var(--bz-form-label-font-weight);
+    line-height: var(--bz-from-label-line-height);
+    color: var(--bz-form-label-color);
+    text-wrap: nowrap;
+
+    &:after {
+        font-size: inherit;
+        line-height: inherit;
+        color: var(--bz-color-text-secondary);
+    }
+
+    &--invalid {
+        --bz-form-label-color: var(--bz-color-system-error);
+        --bz-form-label-asterisk-color: var(--bz-color-system-error);
+    }
+
+    &--disabled {
+        pointer-events: none;
+        opacity: 0.5;
+    }
+
+    &--required:after {
+        content: "*";
+    }
+}

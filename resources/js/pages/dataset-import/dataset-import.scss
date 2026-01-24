@@ -1,0 +1,56 @@
+.dataset-import {
+    &__form {
+        width: 100%;
+    }
+
+    &__field {
+        width: 100%;
+    }
+
+    &__input,
+    &__textarea {
+        width: 100%;
+        padding: var(--vf-space-300);
+        border: 1px solid var(--vf-color-border-default);
+        border-radius: var(--vf-border-radius-300);
+        font-family: inherit;
+        font-size: inherit;
+        background-color: var(--vf-color-surface-0);
+        color: var(--vf-color-text-primary);
+
+        &:focus {
+            outline: none;
+            border-color: var(--vf-color-border-focus);
+            box-shadow: 0 0 0 2px var(--vf-color-border-focus);
+        }
+
+        &::placeholder {
+            color: var(--vf-color-text-secondary);
+        }
+    }
+
+    &__textarea {
+        resize: vertical;
+        min-height: 200px;
+        font-family: monospace;
+    }
+
+    &__error {
+        padding: var(--vf-space-400);
+        background-color: var(--vf-color-surface-error);
+        border-radius: var(--vf-border-radius-300);
+    }
+
+    &__result {
+        margin-top: var(--vf-space-600);
+    }
+
+    &__errors {
+        margin-top: var(--vf-space-400);
+        padding: var(--vf-space-400);
+        background-color: var(--vf-color-surface-warning);
+        border-radius: var(--vf-border-radius-300);
+        max-height: 300px;
+        overflow-y: auto;
+    }
+}

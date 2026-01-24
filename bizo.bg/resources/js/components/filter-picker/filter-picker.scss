@@ -1,0 +1,257 @@
+/**
+ * Filter Picker Component Styles
+ */
+
+.bz-filter-picker {
+    position: relative;
+    display: inline-block;
+
+    &__overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 40;
+        background: transparent;
+    }
+
+    &__trigger {
+        min-width: auto;
+        width: auto;
+        height: auto;
+        padding: 0;
+        font-size: 14px;
+        font-weight: 400;
+        border: none;
+        border-radius: 0;
+        background: transparent;
+        justify-content: flex-start;
+        gap: var(--bz-space-100);
+
+        // Override button component styles for text-based look
+        --bz-button-height: auto;
+
+        .bz-button__text {
+            flex: 1;
+            text-align: left;
+            overflow: visible;
+            text-overflow: clip;
+            white-space: normal;
+            font-size: 14px;
+            font-weight: 400;
+            padding: 0;
+        }
+
+        &:hover:not(&--disabled) {
+            border: none;
+        }
+
+        &--open {
+            border: none;
+        }
+
+        &--placeholder {
+            .bz-button__text,
+            .bz-filter-picker__text {
+                color: var(--bz-color-text-secondary);
+            }
+        }
+
+        &--disabled {
+            background: transparent;
+            border: none;
+            opacity: 0.6;
+
+            .bz-button__text,
+            .bz-filter-picker__text {
+                color: var(--bz-color-text-secondary);
+            }
+        }
+    }
+
+    &__text {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 24px;
+        color: var(--bz-color-brand-500);
+        white-space: nowrap;
+    }
+
+    &__trigger--placeholder {
+        .bz-filter-picker__text {
+            color: var(--bz-color-text-secondary);
+        }
+    }
+
+    &__text-line {
+        height: 1px;
+        width: 100%;
+        background-image: repeating-linear-gradient(
+            to right,
+            var(--bz-color-border-subtle) 0,
+            var(--bz-color-border-subtle) 2px,
+            transparent 2px,
+            transparent 4px
+        );
+    }
+
+    &__icon {
+        width: 20px;
+        height: 20px;
+        color: var(--bz-color-brand-500);
+        transition: transform 0.15s ease-in-out;
+        flex-shrink: 0;
+        margin-left: 0;
+
+        &--rotated {
+            transform: rotate(180deg);
+        }
+    }
+
+    &__dropdown {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: auto;
+        z-index: 50;
+        margin-top: 2px;
+        background: white;
+        border: none;
+        border-radius: 16px;
+        box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.1);
+        overflow: visible;
+        min-width: 100%;
+        width: max-content;
+        max-width: calc(100vw - 32px);
+    }
+
+    // Flip dropdown to align right when it would overflow
+    &--align-right &__dropdown {
+        left: auto;
+        right: 0;
+    }
+
+    &__menu {
+        padding: var(--bz-space-200) 0;
+    }
+
+    &__option {
+        width: 100%;
+        min-height: auto;
+        padding: var(--bz-space-300) var(--bz-space-600);
+        border: none;
+        border-radius: 0;
+        margin: 0;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 24px;
+        color: var(--bz-color-text-primary);
+        background: transparent;
+        justify-content: space-between;
+        text-align: left;
+        transition: background-color 0.15s ease-in-out;
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+        gap: 10px;
+
+        // Override button component styles completely
+        --bz-button-height: auto;
+
+        // Reset button styles
+        &.bz-button {
+            border: none;
+            box-shadow: none;
+            background: transparent;
+
+            &:focus {
+                box-shadow: none;
+                outline: none;
+            }
+        }
+
+        .bz-button__text {
+            text-align: left;
+            flex: 1;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 24px;
+            color: var(--bz-color-text-primary);
+            padding: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        &:hover:not(&--selected) {
+            background: var(--bz-color-surface-100);
+
+            .bz-button__text,
+            .bz-filter-picker__option-text {
+                color: var(--bz-color-text-primary);
+            }
+        }
+
+        &:active {
+            background: var(--bz-color-surface-100);
+        }
+
+        &--selected {
+            background: var(--bz-color-surface-100);
+        }
+
+        &--clear {
+            color: #dc2626;
+            font-weight: 500;
+
+            .bz-button__text {
+                color: #dc2626;
+                font-weight: 500;
+            }
+
+            &:hover {
+                background: #fef2f2;
+
+                .bz-button__text {
+                    color: #b91c1c;
+                }
+            }
+        }
+    }
+
+    &__option-text {
+        flex: 1;
+        text-align: left;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 24px;
+        color: var(--bz-color-text-primary);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    &__separator {
+        height: 1px;
+        background: #e5e7eb;
+        margin: 4px 0;
+    }
+
+    &__option-check {
+        width: 12px;
+        height: 12px;
+        color: #1d4ed8;
+        flex-shrink: 0;
+        margin-left: 8px;
+    }
+}
+
+// Responsive adjustments
+@media (max-width: 640px) {
+    .bz-filter-picker {
+        &__trigger {
+            min-width: 60px;
+        }
+    }
+}

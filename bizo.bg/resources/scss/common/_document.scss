@@ -1,0 +1,33 @@
+// ==========================================================================
+// Common - Document
+// ==========================================================================
+
+:where(html) {
+    // Prevent font size inflation.
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+
+    // Ensure consistent default font size.
+    font-size: 100%;
+}
+
+:where(body) {
+    // Remove default browser margins and padding
+    margin: 0 !important;
+    padding: 0 !important;
+
+    // Ensure consistent text rendering.
+    font-family: var(--bz-font-family-sans);
+    font-size: var(--bz-font-size-m);
+    font-weight: var(--bz-font-weight-light);
+    line-height: var(--bz-line-height);
+    color: var(--bz-color-dark-500);
+
+    // Improve text rendering.
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    // Use `optimizeSpeed` to prevent performance hit
+    // caused by `optimizeLegibility`.
+    text-rendering: optimizeSpeed;
+}

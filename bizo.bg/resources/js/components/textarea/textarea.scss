@@ -1,0 +1,68 @@
+// ==========================================================================
+// Components - Textarea
+// ==========================================================================
+
+:root {
+    --bz-textarea-padding: var(--bz-space-300);
+    --bz-textarea-border-color: var(--bz-color-purple-100);
+    --bz-textarea-border-radius: var(--bz-border-radius-100);
+    --bz-textarea-font-size: var(--bz-font-size-m);
+    --bz-textarea-font-weight: var(--bz-font-weight-regular);
+    --bz-textarea-line-height: var(--bz-line-height);
+    --bz-textarea-color: var(--bz-color-gray-500);
+    --bz-textarea-placeholder-color: var(--bz-color-purple-300);
+}
+
+.bz-textarea {
+    display: block;
+    width: 100%;
+    width: -moz-available;
+    width: -webkit-fill-available;
+    appearance: none;
+    padding: var(--bz-textarea-padding);
+    border-radius: var(--bz-textarea-border-radius);
+    border: 1px solid var(--bz-textarea-border-color);
+    margin: 0;
+    resize: none;
+    background: transparent;
+    font-size: var(--bz-textarea-font-size);
+    font-weight: var(--bz-textarea-font-weight);
+    line-height: var(--bz-textarea-line-height);
+    color: var(--bz-textarea-color);
+    resize: vertical;
+
+    &:focus-within:not(&--is-disabled),
+    &:hover:not(&--is-disabled) {
+        --bz-textarea-color: var(--bz-color-purple-500);
+        --bz-textarea-placeholder-color: var(--bz-color-purple-300);
+        --bz-textarea-border-color: var(--bz-color-purple-500);
+    }
+
+    &::placeholder {
+        opacity: 1;
+        color: var(--bz-textarea-placeholder-color);
+    }
+
+    &--invalid {
+        --bz-textarea-color: var(--bz-color-system-error);
+        --bz-textarea-placeholder-color: var(--bz-color-system-error);
+        --bz-textarea-border-color: var(--bz-color-system-error);
+    }
+
+    &:not(:placeholder-shown):not(&--invalid):not(&--disabled) {
+        --bz-textarea-border-color: var(--bz-color-purple-100);
+        --bz-textarea-color: var(--bz-color-purple-500);
+
+        &:focus-within {
+            --bz-textarea-border-color: var(--bz-color-purple-500);
+        }
+    }
+
+    &--disabled {
+        --bz-textarea-border-color: var(--bz-color-surface-100);
+        --bz-textarea-color: var(--bz-color-text-secondary);
+        --bz-textarea-placeholder-color: var(--bz-color-text-secondary);
+        background-color: var(--bz-color-surface-100);
+        opacity: 1;
+    }
+}

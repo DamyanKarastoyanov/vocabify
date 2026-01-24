@@ -1,0 +1,63 @@
+@mixin custom-scrollbar {
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-color: var(--bz-scrollable-scrollbar-thumb-color) transparent;
+    scrollbar-width: thin;
+
+    @supports (scrollbar-width: thin) {
+        --bz-scrollable-scrollbar-offset: 4px;
+        --bz-scrollable-scrollbar-offset-gap: calc(
+            (var(--bz-scrollable-scrollbar-size) * 3) - var(
+                    --bz-scrollable-scrollbar-offset
+                )
+        );
+    }
+
+    &::-webkit-scrollbar {
+        width: var(--bz-scrollable-scrollbar-size);
+        height: var(--bz-scrollable-scrollbar-size);
+    }
+
+    &::-webkit-scrollbar-button:end:increment,
+    &::-webkit-scrollbar-button:start:decrement {
+        display: none;
+    }
+
+    &::-webkit-scrollbar-track-piece {
+        background: var(--bz-scrollable-track-color);
+    }
+
+    &::-webkit-scrollbar-track-piece:vertical:start {
+        border-radius: var(--bz-scrollable-scrollbar-radius)
+            var(--bz-scrollable-scrollbar-radius) 0 0;
+    }
+
+    &::-webkit-scrollbar-track-piece:vertical:end {
+        border-radius: 0 0 var(--bz-scrollable-scrollbar-radius)
+            var(--bz-scrollable-scrollbar-radius);
+    }
+
+    &::-webkit-scrollbar-track-piece:horizontal:start {
+        border-radius: var(--bz-scrollable-scrollbar-radius) 0 0
+            var(--bz-scrollable-scrollbar-radius);
+    }
+
+    &::-webkit-scrollbar-track-piece:horizontal:end {
+        border-radius: 0 var(--bz-scrollable-scrollbar-radius)
+            var(--bz-scrollable-scrollbar-radius) 0;
+    }
+
+    &::-webkit-scrollbar-corner {
+        background-color: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        display: block;
+        background: var(--bz-scrollable-scrollbar-thumb-color);
+        border-radius: var(--bz-scrollable-scrollbar-radius);
+    }
+
+    &:hover::-webkit-scrollbar-thumb {
+        background: var(--bz-scrollable-scrollbar-thumb-color);
+    }
+}

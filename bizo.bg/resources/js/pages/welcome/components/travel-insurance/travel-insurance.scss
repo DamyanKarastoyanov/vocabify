@@ -1,0 +1,228 @@
+@use "../../../../../scss/tokens/breakpoints" as *;
+
+// ==========================================================================
+// Welcome - Travel Insurance Section
+// ==========================================================================
+
+.bz-travel-insurance {
+    background: var(--bz-color-surface-0);
+    padding: 0 0 12rem 0; // 152px - extra large desktop
+    position: relative;
+    width: 105rem; // 1680px - extra large desktop
+    margin: 0 auto;
+
+    // Scale down for large desktop (1800px and below)
+    @media (max-width: $bz-breakpoint-3xl) {
+        padding: 0 0 10rem 0; // 128px
+        width: 90rem; // 1440px - matches other sections
+    }
+
+    // Scale down for medium desktop (1520px and below)
+    @media (max-width: $bz-breakpoint-2xl) {
+        padding: 0 0 9rem 0; // 112px
+        width: 85rem; // 1360px - matches other sections
+    }
+
+    // Scale down for small desktop (1367px and below)
+    @media (max-width: $bz-breakpoint-xl) {
+        padding: 0 0 8rem 0; // 96px
+        width: 48rem; // 768px - matches bz-create-profile
+    }
+
+    // Scale down for tablet (1024px and below)
+    @media (max-width: $bz-breakpoint-md) {
+        padding: 0 0 7rem 0; // 112px
+        width: 50rem; // 800px - tablet size
+    }
+
+    // Mobile styles (768px and below)
+    @media (max-width: $bz-breakpoint-sm) {
+        width: 100%;
+        padding: 0 0 48px 0; // From Figma
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    // Extra small mobile (480px and below)
+    @media (max-width: $bz-breakpoint-xs) {
+        padding: 0 0 32px 0;
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    &__container {
+        width: 76.5rem; // 1224px - extra large desktop
+        margin: 0 auto;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 26.875rem; // 430px
+        padding: 0 6rem; // 96px
+
+        // Scale down for large desktop (1800px and below)
+        @media (max-width: $bz-breakpoint-3xl) {
+            width: 64rem; // 1024px - reduced from 1088px
+            padding: 0 5rem; // 80px
+            min-height: 24rem; // 384px
+        }
+
+        // Scale down for medium desktop (1520px and below)
+        @media (max-width: $bz-breakpoint-2xl) {
+            width: 60rem; // 960px - reduced from 1024px
+            padding: 0 4rem; // 64px
+            min-height: 22rem; // 352px
+        }
+
+        // Scale down for small desktop (1367px and below)
+        @media (max-width: $bz-breakpoint-xl) {
+            width: 48rem; // 768px - reduced from 832px
+            padding: 0 3rem; // 48px
+            min-height: 20rem; // 320px
+        }
+
+        // Scale down for tablet (1024px and below)
+        @media (max-width: $bz-breakpoint-md) {
+            width: 40rem; // 640px - tablet size
+            padding: 0rem; // 40px
+            min-height: 18rem; // 288px
+        }
+
+        // Mobile styles (768px and below)
+        @media (max-width: $bz-breakpoint-sm) {
+            width: 100%;
+            padding: 0;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px; // From Figma
+            min-height: auto;
+        }
+    }
+
+    &__content {
+        position: relative;
+        z-index: 2;
+        max-width: 31rem; // 496px
+        margin-left: auto;
+
+        // Scale down font-size for large desktop and below
+        @media (max-width: $bz-breakpoint-2xl) {
+            max-width: 26rem;
+
+            .bz-text--variant-heading-xl {
+                font-size: 2rem !important;
+                line-height: 2rem !important;
+            }
+
+            .bz-text--variant-body-l {
+                font-size: 1rem !important;
+                line-height: 1.75rem !important;
+            }
+        }
+
+        // Scale down for tablet (1024px and below)
+        @media (max-width: $bz-breakpoint-md) {
+            max-width: 21rem;
+
+            .bz-text--variant-heading-xl {
+                font-size: 1.8rem !important;
+                line-height: 1.8rem !important;
+            }
+
+            .bz-text--variant-body-l {
+                font-size: 0.9rem !important;
+                line-height: 1.5rem !important;
+            }
+        }
+
+        // Mobile styles (768px and below)
+        @media (max-width: $bz-breakpoint-sm) {
+            width: 100%;
+            max-width: 100%;
+            margin-left: 0;
+            text-align: center;
+
+            .bz-text--variant-heading-xl {
+                font-size: 1.75rem !important; // 28px from Figma
+                line-height: 2rem !important; // 32px from Figma
+            }
+
+            .bz-text--variant-body-l {
+                font-size: 1rem !important; // 16px from Figma
+                line-height: 1.5rem !important; // 24px from Figma
+            }
+
+            .bz-button {
+                width: 25rem;
+                height: 56px !important;
+                font-size: 1.125rem !important;
+                padding: 16px 32px !important;
+                border-radius: 12px !important;
+            }
+        }
+
+        // Extra small mobile (480px and below)
+        @media (max-width: $bz-breakpoint-xs) {
+            .bz-button {
+                width: 100%;
+                height: 48px !important;
+                font-size: 1rem !important;
+                padding: 12px 24px !important;
+            }
+        }
+    }
+
+    &__mascot {
+        position: absolute;
+        left: 6rem;
+        bottom: 0;
+        z-index: 1;
+        height: 24rem; // 384px
+        width: 18rem; // 288px
+        pointer-events: none;
+
+        &-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: bottom left;
+        }
+
+        // Scale down for large desktop (1800px and below)
+        @media (max-width: $bz-breakpoint-3xl) {
+            height: 22.5rem; // 360px
+            width: 19rem; // 304px
+            left: 8rem; // 128px
+        }
+
+        // Scale down for medium desktop (1520px and below)
+        @media (max-width: $bz-breakpoint-2xl) {
+            height: 21.5rem; // 344px
+            width: 17.75rem; // 284px
+            left: 6rem; // 96px
+        }
+
+        @media (max-width: $bz-breakpoint-xl) {
+            height: 20rem; // 320px
+            width: 16rem; // 256px
+            left: 1rem; // 16px
+        }
+
+        // Scale down for tablet (1024px and below)
+        @media (max-width: $bz-breakpoint-md) {
+            height: 18rem; // 288px
+            width: 14rem; // 224px
+            left: 2rem; // 8px
+        }
+
+        // Mobile styles (768px and below)
+        @media (max-width: $bz-breakpoint-sm) {
+            position: relative;
+            height: 310px; // From Figma
+            width: 260px; // From Figma
+            left: auto;
+            bottom: auto;
+            margin: 0 auto;
+        }
+    }
+}
