@@ -22,4 +22,9 @@ class Dataset extends Model
     {
         return $this->hasMany(Tag::class);
     }
+
+    public function practiceSessions(): HasMany
+    {
+        return $this->hasMany(PracticeSession::class);
+    }
 }

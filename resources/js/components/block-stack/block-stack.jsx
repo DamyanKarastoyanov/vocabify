@@ -10,7 +10,7 @@ import classNames from 'classnames';
 import getCssProps from '@/utils/get-css-props';
 
 const BlockStack = forwardRef(function BlockStack(props, ref) {
-    const { as, align, className, inlineAlign, gap = '0', height, ...restProps } = props;
+    const { as, align, className, inlineAlign, blockAlign, gap = '0', height, ...restProps } = props;
 
     const Component = as || 'div';
 
@@ -20,6 +20,7 @@ const BlockStack = forwardRef(function BlockStack(props, ref) {
         ...getCssProps('block-stack', [
             ['align', align],
             ['inline-align', inlineAlign],
+            ['block-align', blockAlign],
         ]),
     };
 

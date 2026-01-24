@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\Vocabulary\DatasetImportController;
 use App\Http\Web\Datasets\Controllers\DatasetsController;
+use App\Http\Web\Practice\Controllers\PracticeController;
 use App\Http\Web\Auth\Controllers\LoginController;
 use App\Http\Web\Auth\Controllers\RegisterController;
 
@@ -31,4 +32,11 @@ Route::middleware(['auth'])->group(function () {
         ->name('datasets.show');
     Route::post('/datasets/{dataset}/import-words', [DatasetImportController::class, 'store'])
         ->name('datasets.import-words');
+    
+    Route::get('/practice/{dataset}', [PracticeController::class, 'create'])
+        ->name('practice.create');
+    Route::post('/practice-session-words/{practiceSessionWord}/answer', [PracticeController::class, 'answerWord'])
+        ->name('practice.answer-word');
+    Route::post('/practice-sessions/{practiceSession}/complete', [PracticeController::class, 'complete'])
+        ->name('practice.complete');
 });

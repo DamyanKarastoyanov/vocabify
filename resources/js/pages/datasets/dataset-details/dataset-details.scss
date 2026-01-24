@@ -2,6 +2,77 @@
     // Page-specific styles for dataset details
 }
 
+// Practice Button with Popper Component Styles
+.practice-config-popper {
+    .vf-form-label {
+        font-size: 1rem;
+    }
+    min-width: 400px;
+    max-width: 500px;
+
+    &__header {
+        margin-bottom: var(--vf-space-600);
+    }
+
+    &__close {
+        min-width: auto;
+        width: var(--vf-size-600);
+        height: var(--vf-size-600);
+        padding: 0;
+        font-size: var(--vf-font-size-xl);
+        line-height: 1;
+        color: var(--vf-color-text-secondary);
+        background-color: transparent;
+        border: none;
+        border-radius: var(--vf-border-radius-100);
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:hover {
+            color: var(--vf-color-text-primary);
+            background-color: var(--vf-color-surface-100);
+        }
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    &__content {
+        margin-top: var(--vf-space-600);
+    }
+
+    &__select {
+        width: 100%;
+        padding: var(--vf-space-300) var(--vf-space-400);
+        border: var(--vf-border-size-025) solid var(--vf-color-border-default);
+        border-radius: var(--vf-border-radius-150);
+        background-color: var(--vf-color-surface-0);
+        color: var(--vf-color-text-primary);
+        font-size: var(--vf-font-size-m);
+        font-family: var(--vf-font-family-sans);
+        cursor: pointer;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23475569' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right var(--vf-space-300) center;
+        padding-right: var(--vf-space-1000);
+
+        &:focus {
+            outline: none;
+            border-color: var(--vf-color-brand-500);
+            box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.1);
+        }
+
+        &:hover {
+            border-color: var(--vf-color-brand-500);
+        }
+    }
+}
+
 .dataset-details__search {
     position: relative;
 }

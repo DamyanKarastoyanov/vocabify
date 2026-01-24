@@ -15,6 +15,8 @@ import IconCompact from '@/components/icons/compact';
 import IconChevronDown from '@/components/icons/chevron-down';
 import SummaryBoxes from './components/summary-boxes/summary-boxes';
 import WordsTable from './components/words-table/words-table';
+import PracticeButtonWithPopper from './components/practice-button-with-popper/practice-button-with-popper';
+import usePracticeConfig from './data/use-practice-config';
 
 const DatasetDetails = () => {
     const props = usePage().props;
@@ -29,12 +31,10 @@ const DatasetDetails = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 50;
 
+    const { config: practiceConfig, updateConfig: updatePracticeConfig } = usePracticeConfig(dataset?.id);
+
     const handleBack = () => {
         router.visit('/datasets');
-    };
-
-    const handlePractice = () => {
-        router.visit(`/datasets/${dataset.id}/practice`);
     };
 
     const handleAddWord = () => {
@@ -107,9 +107,11 @@ const DatasetDetails = () => {
                     <InlineStack align="space-between" blockAlign="center" wrap>
                         <SummaryBoxes dueToday={dueToday} mastered={mastered} newWords={newWords} />
                         <InlineStack gap="300" blockAlign="center">
-                            <Button variant="primary" onClick={handlePractice}>
-                                Practice this dataset
-                            </Button>
+                            <PracticeButtonWithPopper
+                                datasetId={dataset.id}
+                                initialConfig={practiceConfig}
+                                onConfigChange={updatePracticeConfig}
+                            />
                             <Button variant="secondary" onClick={handleAddWord}>
                                 Add new word
                             </Button>

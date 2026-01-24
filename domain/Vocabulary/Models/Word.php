@@ -42,4 +42,17 @@ class Word extends Model
     {
         return $this->belongsToMany(Tag::class);
     }
+
+    public function practiceSessionWords(): HasMany
+    {
+        return $this->hasMany(PracticeSessionWord::class);
+    }
+
+    public function practiceSessions(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(PracticeSession::class, 'practice_session_words')
+            ->withPivot(['order_index', 'result', 'answered_at'])
+            ->withTimestamps()
+            ->orderByPivot('order_index');
+    }
 }

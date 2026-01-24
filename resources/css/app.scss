@@ -23,6 +23,7 @@
 @use "@/components/text/text";
 @use "@/components/text-input/text-input";
 @use "@/components/form-label/form-label";
+@use "@/components/popper/popper";
 
 // ==========================================================================
 // Pages
@@ -34,6 +35,7 @@
 @use "@/pages/datasets/dataset-details/dataset-details";
 @use "@/pages/auth/login/login";
 @use "@/pages/auth/register/register";
+@use "@/pages/practice/practice";
 
 // ==========================================================================
 // Layouts

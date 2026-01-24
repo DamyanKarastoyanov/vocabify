@@ -1,0 +1,259 @@
+.practice {
+    min-height: 100vh;
+    
+    &__header-wrapper {
+        width: 100%;
+    }
+    
+    &__header {
+        margin-bottom: 32px;
+    }
+    
+    &__body {
+        flex: 1 1 auto;
+    }
+    
+    &__word-list {
+        max-width: 800px;
+        margin: 0 auto;
+        width: 100%;
+    }
+    
+    &__footer {
+        margin-top: 32px;
+        padding-top: 24px;
+        border-top: 1px solid var(--vf-color-border-default);
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+    }
+    
+    &__finish-button {
+        background-color: var(--vf-color-brand-500);
+        color: var(--vf-color-black);
+        border-radius: 9999px;
+        padding: 12px 24px;
+        font-weight: 600;
+        border: none;
+        transition: background-color 0.2s;
+        
+        &:hover {
+            background-color: var(--vf-color-brand-600);
+        }
+    }
+}
+
+// Word Row Component Styles
+.word-row {
+    background: var(--vf-color-surface-50, #fafafa);
+    border: 1px solid var(--vf-color-border-subtle, #e5e7eb);
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 24px;
+    
+    &:last-child {
+        margin-bottom: 0;
+    }
+    
+    // Prompt Row
+    &__prompt-row {
+        width: 100%;
+        margin-bottom: 12px;
+    }
+    
+    &__shown-word {
+        font-size: 1.75rem;
+        line-height: 1.4;
+    }
+    
+    &__hidden-section {
+        flex: 1 1 auto;
+        text-align: center;
+    }
+    
+    &__hidden-dots {
+        letter-spacing: 2px;
+        font-size: 1.5rem;
+    }
+    
+    &__hidden-word {
+        font-size: 1.75rem;
+        line-height: 1.4;
+        opacity: 0.85;
+    }
+    
+    &__show-hint-button {
+        background-color: var(--vf-color-surface-0);
+        color: var(--vf-color-text-primary);
+        border: 1px solid var(--vf-color-border-default);
+        border-radius: 9999px;
+        padding: 10px 18px;
+        font-weight: 500;
+        font-size: 1rem;
+        height: 42px;
+        min-width: 110px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+        
+        &:hover {
+            background-color: var(--vf-color-surface-100);
+            border-color: var(--vf-color-border-default);
+        }
+    }
+    
+    &__reveal-button {
+        background-color: var(--vf-color-brand-500);
+        color: var(--vf-color-black);
+        border-radius: 9999px;
+        padding: 10px 22px;
+        font-weight: 600;
+        border: none;
+        height: 42px;
+        min-width: 110px;
+        font-size: 1rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.2s;
+        
+        &:hover {
+            background-color: var(--vf-color-brand-600);
+        }
+    }
+    
+    // Language Badge
+    &__language-badge {
+        padding: 6px 12px;
+        background: var(--vf-color-surface-100);
+        border-radius: 9999px;
+        display: inline-block;
+        font-size: 0.9375rem;
+        
+        &--hint {
+            background: transparent;
+        }
+    }
+    
+    // Hint Row
+    &__hint-row {
+        margin-top: 12px;
+        margin-bottom: 12px;
+        padding: 8px 0;
+        display: flex;
+        align-items: center;
+    }
+    
+    &__hint-accent {
+        width: 4px;
+        height: 20px;
+        background-color: var(--vf-color-brand-500);
+        border-radius: 2px;
+        flex-shrink: 0;
+    }
+    
+    &__hint-text {
+        font-size: 1rem;
+        color: var(--vf-color-text-secondary);
+    }
+    
+    &__hide-hint-button {
+        background-color: var(--vf-color-surface-0);
+        color: var(--vf-color-text-primary);
+        border: 1px solid var(--vf-color-border-default);
+        border-radius: 9999px;
+        padding: 10px 18px;
+        font-weight: 500;
+        font-size: 1rem;
+        height: 42px;
+        min-width: 110px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+        
+        &:hover {
+            background-color: var(--vf-color-surface-100);
+            border-color: var(--vf-color-border-default);
+        }
+    }
+    
+    // Answer Row
+    &__answer-row {
+        margin-top: 12px;
+        width: 100%;
+    }
+    
+    &__answer-input {
+        width: 100%;
+        
+        input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid var(--vf-color-border-default);
+            border-radius: 8px;
+            background: var(--vf-color-surface-0);
+            font-size: 1.25rem;
+            transition: border-color 0.2s;
+            
+            &:focus {
+                outline: none;
+                border-color: var(--vf-color-brand-500);
+                box-shadow: 0 0 0 3px var(--vf-color-brand-100);
+            }
+        }
+    }
+    
+    &__paper-mode {
+        margin-top: 12px;
+        padding-top: 8px;
+        
+        p {
+            font-size: 1rem;
+        }
+    }
+}
+
+// Progress Indicator Component Styles
+.progress-indicator {
+    width: 100%;
+    height: 8px;
+    background-color: var(--color-border);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-indicator__bar {
+    height: 100%;
+    background-color: var(--color-primary);
+    transition: width 0.3s ease;
+    border-radius: 4px;
+}
+
+// Word Card Component Styles
+.word-card {
+    padding: var(--space-600);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-md);
+    background-color: var(--color-surface);
+}
+
+.word-card__prompt {
+    padding: var(--space-400);
+    background-color: var(--color-surface-secondary);
+    border-radius: var(--border-radius-sm);
+    text-align: center;
+}
+
+.word-card__answer-section {
+    padding: var(--space-400);
+}
+
+.word-card__answer {
+    padding: var(--space-300);
+    background-color: var(--color-surface-secondary);
+    border-radius: var(--border-radius-sm);
+}
