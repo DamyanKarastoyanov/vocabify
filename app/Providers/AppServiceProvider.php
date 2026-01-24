@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use Domain\Vocabulary\Models\Dataset;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 

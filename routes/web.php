@@ -27,6 +27,8 @@ Route::middleware(['auth'])->group(function () {
         ->name('datasets.create');
     Route::post('/datasets', [DatasetsController::class, 'store'])
         ->name('datasets.store');
+    Route::get('/datasets/{dataset}', [DatasetsController::class, 'show'])
+        ->name('datasets.show');
     Route::post('/datasets/{dataset}/import-words', [DatasetImportController::class, 'store'])
         ->name('datasets.import-words');
 });

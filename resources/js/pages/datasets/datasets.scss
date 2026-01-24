@@ -119,7 +119,7 @@
     gap: var(--vf-space-100);
     box-shadow: var(--vf-shadow-100);
     transition: box-shadow 0.2s ease, transform 0.2s ease;
-    cursor: default;
+    cursor: pointer;
 
     &:hover {
         box-shadow: var(--vf-shadow-200);

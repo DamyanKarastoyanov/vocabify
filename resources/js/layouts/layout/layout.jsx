@@ -1,7 +1,7 @@
 ﻿/**
  * External dependencies
  */
-import { usePage, router } from '@inertiajs/react';
+import { usePage, router, Link } from '@inertiajs/react';
 
 /**
  * Internal dependencies
@@ -16,7 +16,7 @@ const Layout = (props) => {
     const { children } = props;
     const { auth } = usePage().props;
     const user = auth?.user;
-    const isAuthenticated = Boolean(user);
+
     return (
         <Box minHeight="100vh" backgroundColor="surface-0" className="layout" width="100%" dangerouslySetInlineStyle={{ __style: { display: 'flex', flexDirection: 'column' } }}>
             {/* Header */}
@@ -30,19 +30,32 @@ const Layout = (props) => {
                                 </Text>
                             </Box>
                             <InlineStack gap="400" className="layout-header__nav">
-                                <Text as="a" href="#" variant="body-m" color="text-inverse" className="layout-header__nav-link">
-                                    Research
-                                </Text>
-                                <Text as="a" href="#" variant="body-m" color="text-inverse" className="layout-header__nav-link">
-                                    About
-                                </Text>
-                                <Text as="a" href="#" variant="body-m" color="text-inverse" className="layout-header__nav-link">
-                                    Blog
-                                </Text>
+                                {user && (
+                                    <Link href="/datasets" className="layout-header__nav-link">
+                                        <Text variant="body-m" color="text-inverse">
+                                            Database
+                                        </Text>
+                                    </Link>
+                                )}
+                                <Link href="#" className="layout-header__nav-link">
+                                    <Text variant="body-m" color="text-inverse">
+                                        Research
+                                    </Text>
+                                </Link>
+                                <Link href="#" className="layout-header__nav-link">
+                                    <Text variant="body-m" color="text-inverse">
+                                        About
+                                    </Text>
+                                </Link>
+                                <Link href="#" className="layout-header__nav-link">
+                                    <Text variant="body-m" color="text-inverse">
+                                        Blog
+                                    </Text>
+                                </Link>
                             </InlineStack>
                         </InlineStack>
                         <InlineStack gap="300">
-                            {isAuthenticated ? (
+                            {user ? (
                                 <>
                                     <Text variant="body-m" color="text-inverse" className="layout-header__user-name">
                                         {user.name}

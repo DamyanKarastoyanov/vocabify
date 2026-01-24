@@ -145,8 +145,17 @@ const DatasetImport = () => {
                                     Dataset Content
                                 </Text>
                                 <Text variant="body-s" color="text-secondary">
-                                    Format: hiragana - kanji - bulgarian - middle (optional)
+                                    Format: reading,kanji,native[,middle][ | tag1,tag2,tag3]
                                 </Text>
+                                <Text variant="body-s" color="text-secondary">
+                                    Examples:
+                                </Text>
+                                <Box as="pre" className="dataset-import__format-examples" padding="300" backgroundColor="surface-100" borderRadius="200" fontSize="12px">
+                                    {`たべる,食べる,ям,to eat | verb,jlpt-n5
+                                        ねこ,猫,котка | noun,jlpt-n5,topic
+                                        いぬ,犬,куче,to run
+                                        みず,水,вода`}
+                                </Box>
                                 <Box
                                     as="textarea"
                                     id="content"

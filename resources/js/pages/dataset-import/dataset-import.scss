@@ -53,4 +53,11 @@
         max-height: 300px;
         overflow-y: auto;
     }
+
+    &__format-examples {
+        font-family: monospace;
+        white-space: pre;
+        overflow-x: auto;
+        margin: 0;
+    }
 }

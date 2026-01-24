@@ -1,3 +1,4 @@
+import { usePage } from '@inertiajs/react';
 import Box from '@/components/box/box';
 import Text from '@/components/text/text';
 import Button from '@/components/button/button';
@@ -9,6 +10,8 @@ import IconFolder from '@/components/icons/folder';
 
 const DatasetCard = (props) => {
     const { dataset, onOpen, onPreview, onMenuClick } = props;
+
+    console.log(usePage().props);
 
     const getLanguageTagColor = (code) => {
         const colors = {
@@ -24,8 +27,29 @@ const DatasetCard = (props) => {
         return num.toLocaleString();
     };
 
+    const handleCardClick = (e) => {
+        // Don't trigger card click if clicking on menu button
+        if (e.target.closest('.dataset-card__menu-button')) {
+            return;
+        }
+        if (onOpen && dataset) {
+            onOpen(dataset);
+        }
+    };
+
     return (
-        <Box className="dataset-card">
+        <Box 
+            className="dataset-card" 
+            onClick={handleCardClick}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    handleCardClick(e);
+                }
+            }}
+        >
             <Box className="dataset-card__header">
                 <InlineStack align="space-between" blockAlign="center" gap="300">
                     <InlineStack gap="200" blockAlign="center">

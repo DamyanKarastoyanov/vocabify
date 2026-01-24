@@ -17,4 +17,9 @@ class Dataset extends Model
     {
         return $this->hasMany(Word::class);
     }
+
+    public function tags(): HasMany
+    {
+        return $this->hasMany(Tag::class);
+    }
 }

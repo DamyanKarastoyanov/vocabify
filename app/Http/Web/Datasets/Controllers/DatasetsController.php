@@ -5,11 +5,13 @@ namespace App\Http\Web\Datasets\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Web\Datasets\Queries\DatasetsQuery;
 use App\Http\Web\Datasets\Resources\DatasetsResource;
+use App\Http\Web\Datasets\Resources\WordsResource;
+use Domain\Vocabulary\Models\Dataset;
+use Domain\Vocabulary\Actions\CreateDatasetAction;
+use Domain\Vocabulary\Actions\ImportWordsAction;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
-use Domain\Vocabulary\Actions\CreateDatasetAction;
-use Domain\Vocabulary\Actions\ImportWordsAction;
 
 class DatasetsController extends Controller
 {
@@ -23,6 +25,21 @@ class DatasetsController extends Controller
     {
         return inertia('datasets/datasets', [
             'datasets' => fn() => DatasetsResource::make((new DatasetsQuery($request))->get()),
+        ]);
+    }
+
+    public function show(Request $request, Dataset $dataset): Response
+    {
+        $dataset->loadCount('words');
+
+        $words = $dataset->words()
+            ->with(['nativeGloss', 'middleGloss', 'tags'])
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return inertia('datasets/dataset-details/dataset-details', [
+            'dataset' => DatasetsResource::make($dataset),
+            'words' => WordsResource::collection($words)->resolve(),
         ]);
     }
 
