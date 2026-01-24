@@ -2,7 +2,6 @@
  * External dependencies
  */
 import { useState } from 'react';
-import axios from 'axios';
 
 /**
  * Internal dependencies
@@ -12,6 +11,7 @@ import Box from '@/components/box/box';
 import BlockStack from '@/components/block-stack/block-stack';
 import Text from '@/components/text/text';
 import Button from '@/components/button/button';
+import httpClient from '@/data/http-client';
 import { validateDatasetImport } from '@/pages/dataset-import/validations/dataset-import-validation';
 
 const DatasetImport = () => {
@@ -39,7 +39,7 @@ const DatasetImport = () => {
         setIsSubmitting(true);
 
         try {
-            const response = await axios.post('/datasets', data);
+            const response = await httpClient.post('/datasets', data);
             setResult(response.data);
             setData({
                 name: '',
@@ -49,7 +49,14 @@ const DatasetImport = () => {
             });
             setErrors({});
         } catch (error) {
-            if (error.response?.data?.errors) {
+            if (error.response?.data?.line_errors) {
+                // Validation errors from word parsing
+                setResult({
+                    dataset_name: data.name,
+                    line_errors: error.response.data.line_errors,
+                });
+                setErrors({ submit: error.response?.data?.message || 'Import failed due to validation errors.' });
+            } else if (error.response?.data?.errors) {
                 setErrors(error.response.data.errors);
             } else {
                 setErrors({ submit: error.response?.data?.message || 'An error occurred during import.' });
@@ -152,9 +159,9 @@ const DatasetImport = () => {
                                 </Text>
                                 <Box as="pre" className="dataset-import__format-examples" padding="300" backgroundColor="surface-100" borderRadius="200" fontSize="12px">
                                     {`たべる,食べる,ям,to eat | verb,jlpt-n5
-                                        ねこ,猫,котка | noun,jlpt-n5,topic
-                                        いぬ,犬,куче,to run
-                                        みず,水,вода`}
+ねこ,猫,котка | noun,jlpt-n5,topic
+いぬ,犬,куче,to run
+みず,水,вода`}
                                 </Box>
                                 <Box
                                     as="textarea"
@@ -196,7 +203,7 @@ const DatasetImport = () => {
                             </Text>
                             <BlockStack gap="300">
                                 <Text variant="body-m" color="text-primary">
-                                    <strong>Dataset:</strong> {result.dataset_name} (ID: {result.dataset_id})
+                                    <strong>Dataset:</strong> {result.dataset_name})
                                 </Text>
                                 <Text variant="body-m" color="text-success">
                                     <strong>Imported:</strong> {result.imported_count} words
@@ -213,9 +220,24 @@ const DatasetImport = () => {
                                                 Line Errors:
                                             </Text>
                                             {result.line_errors.slice(0, 10).map((error, index) => (
-                                                <Text key={index} variant="body-s" color="text-error">
-                                                    Line {error.line}: {error.reason}
-                                                </Text>
+                                                <BlockStack key={index} gap="100">
+                                                    <Text variant="body-s" color="text-error">
+                                                        Line {error.line}: {error.reason}
+                                                    </Text>
+                                                    {error.content && (
+                                                        <Box 
+                                                            as="pre" 
+                                                            padding="200" 
+                                                            backgroundColor="surface-200" 
+                                                            borderRadius="100" 
+                                                            fontSize="12px" 
+                                                            fontFamily="monospace"
+                                                            overflow="auto"
+                                                        >
+                                                            {error.content}
+                                                        </Box>
+                                                    )}
+                                                </BlockStack>
                                             ))}
                                             {result.line_errors.length > 10 && (
                                                 <Text variant="body-s" color="text-secondary">

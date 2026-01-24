@@ -10,6 +10,7 @@ use Domain\Vocabulary\Models\Dataset;
 use Domain\Vocabulary\Actions\CreateDatasetAction;
 use Domain\Vocabulary\Actions\ImportWordsAction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -58,6 +59,8 @@ class DatasetsController extends Controller
         ]);
 
         try {
+            DB::beginTransaction();
+
             $dataset = $this->createDatasetAction->handle(
                 name: $data['name'],
                 targetLanguageCode: $data['target_language_code'],
@@ -70,6 +73,18 @@ class DatasetsController extends Controller
                 middleLanguageCode: $data['middle_language_code']
             );
 
+            // If there are line errors, rollback the transaction
+            if (count($result['errors']) > 0) {
+                DB::rollBack();
+                return response()->json([
+                    'success'     => false,
+                    'message'     => 'Import failed due to validation errors.',
+                    'line_errors' => $result['errors'],
+                ], 422);
+            }
+
+            DB::commit();
+
             return response()->json([
                 'success'        => true,
                 'dataset_id'     => $dataset->id,
@@ -79,6 +94,7 @@ class DatasetsController extends Controller
                 'line_errors'    => $result['errors'],
             ]);
         } catch (\Throwable $e) {
+            DB::rollBack();
             return response()->json([
                 'success'     => false,
                 'message'     => 'Import failed.',
