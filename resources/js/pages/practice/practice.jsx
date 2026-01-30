@@ -30,6 +30,7 @@ const Practice = (props) => {
 
     const totalWords = words.length;
     const revealedCount = Object.keys(revealed).filter(key => revealed[key]).length;
+    const allRevealed = totalWords > 0 && revealedCount === totalWords;
 
     const handleAnswerChange = (wordId, answer) => {
         setAnswers((prev) => ({
@@ -59,12 +60,16 @@ const Practice = (props) => {
         router.visit(`/datasets/${dataset.id}`);
     };
 
-    const handleRevealAll = () => {
-        const allRevealed = {};
+    const handleToggleRevealAll = () => {
+        if (allRevealed) {
+            setRevealed({});
+            return;
+        }
+        const nextRevealed = {};
         words.forEach((wordData) => {
             const wordId = wordData.word.id;
             const practiceSessionWordId = wordData.practice_session_word_id;
-            allRevealed[wordId] = true;
+            nextRevealed[wordId] = true;
             if (practiceSessionWordId) {
                 httpClient.post(`/practice-session-words/${practiceSessionWordId}/answer`, {
                     result: 'skipped'
@@ -73,7 +78,7 @@ const Practice = (props) => {
                 });
             }
         });
-        setRevealed(allRevealed);
+        setRevealed(nextRevealed);
     };
 
     const handleFinishSession = async () => {
@@ -91,7 +96,7 @@ const Practice = (props) => {
     if (!practiceSession || words.length === 0) {
         return (
             <Layout>
-                <Box padding="800" maxWidth="960px" dangerouslySetInlineStyle={{ __style: { margin: '0 auto' } }}>
+                <Box padding="800" maxWidth="1280px" dangerouslySetInlineStyle={{ __style: { margin: '0 auto' } }}>
                     <BlockStack gap="400">
                         <Text variant="heading-l">No practice session</Text>
                         <Text variant="body-m" color="text-secondary">
@@ -110,7 +115,7 @@ const Practice = (props) => {
         <Layout>
             <Box className="practice" padding="800">
                 <BlockStack gap="600">
-                    <Box className="practice__header-wrapper" maxWidth="800px" dangerouslySetInlineStyle={{ __style: { margin: '0 auto' } }}>
+                    <Box className="practice__header-wrapper" maxWidth="1280px" dangerouslySetInlineStyle={{ __style: { margin: '0 auto' } }}>
                         <BlockStack gap="200" className="practice__header">
                             <Button variant="plain" onClick={handleBack}>
                                 ← Back to Dataset
@@ -123,6 +128,15 @@ const Practice = (props) => {
                     </Box>
 
                     <Box className="practice__body">
+                        <Box className="practice__list-header">
+                            <Button
+                                variant="primary"
+                                onClick={handleToggleRevealAll}
+                                className="practice__reveal-all-button"
+                            >
+                                {allRevealed ? 'Hide all' : 'Reveal all'}
+                            </Button>
+                        </Box>
                         <Box className="practice__word-list">
                             {words.map((wordData, index) => {
                                 const wordId = wordData.word.id;
@@ -151,10 +165,10 @@ const Practice = (props) => {
                             <InlineStack gap="200" blockAlign="center">
                                 <Button
                                     variant="primary"
-                                    onClick={handleRevealAll}
+                                    onClick={handleToggleRevealAll}
                                     className="practice__reveal-all-button"
                                 >
-                                    Reveal all
+                                    {allRevealed ? 'Hide all' : 'Reveal all'}
                                 </Button>
                                 <Button
                                     variant="primary"
