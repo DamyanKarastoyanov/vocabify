@@ -10,6 +10,8 @@ const httpClient = axios.create({
     baseURL: window.location.origin,
     headers: {
         'X-Requested-With': 'XMLHttpRequest',
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
     },
 });
 

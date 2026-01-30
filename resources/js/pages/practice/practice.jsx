@@ -16,12 +16,10 @@ const Practice = (props) => {
     const practiceSession = props_data.practiceSession?.data || props_data.practiceSession;
     const recallDirectionConfig = props_data.recallDirection || 'mixed';
     const modeConfig = props_data.mode || 'paper';
-    const enableHints = props_data.enableHints !== undefined ? props_data.enableHints : true;
     
     const words = practiceSession?.words || [];
     const [answers, setAnswers] = useState({});
     const [revealed, setRevealed] = useState({});
-    const [hints, setHints] = useState({});
     const [recallDirections] = useState(() => {
         if (recallDirectionConfig === 'mixed') {
             return words.map(() => Math.random() < 0.5 ? 'target-to-native' : 'native-to-target');
@@ -57,15 +55,25 @@ const Practice = (props) => {
         }
     };
 
-    const handleHint = (wordId) => {
-        setHints((prev) => ({
-            ...prev,
-            [wordId]: !prev[wordId],
-        }));
-    };
-
     const handleBack = () => {
         router.visit(`/datasets/${dataset.id}`);
+    };
+
+    const handleRevealAll = () => {
+        const allRevealed = {};
+        words.forEach((wordData) => {
+            const wordId = wordData.word.id;
+            const practiceSessionWordId = wordData.practice_session_word_id;
+            allRevealed[wordId] = true;
+            if (practiceSessionWordId) {
+                httpClient.post(`/practice-session-words/${practiceSessionWordId}/answer`, {
+                    result: 'skipped'
+                }).catch((error) => {
+                    console.error('Failed to save answer:', error);
+                });
+            }
+        });
+        setRevealed(allRevealed);
     };
 
     const handleFinishSession = async () => {
@@ -127,11 +135,8 @@ const Practice = (props) => {
                                         mode={modeConfig}
                                         answer={answers[wordId] || ''}
                                         isRevealed={revealed[wordId] || false}
-                                        isHintShown={hints[wordId] || false}
-                                        enableHints={enableHints}
                                         onAnswerChange={(answer) => handleAnswerChange(wordId, answer)}
                                         onReveal={() => handleReveal(wordId, practiceSessionWordId)}
-                                        onHint={() => handleHint(wordId)}
                                     />
                                 );
                             })}
@@ -139,17 +144,26 @@ const Practice = (props) => {
                     </Box>
 
                     <Box className="practice__footer">
-                        <InlineStack align="space-between" blockAlign="center">
+                        <InlineStack align="space-between" blockAlign="center" gap="400">
                             <Text variant="body-m" color="text-secondary">
                                 Summary: {revealedCount} / {totalWords} revealed
                             </Text>
-                            <Button 
-                                variant="primary" 
-                                onClick={handleFinishSession}
-                                className="practice__finish-button"
-                            >
-                                Finish Session
-                            </Button>
+                            <InlineStack gap="200" blockAlign="center">
+                                <Button
+                                    variant="primary"
+                                    onClick={handleRevealAll}
+                                    className="practice__reveal-all-button"
+                                >
+                                    Reveal all
+                                </Button>
+                                <Button
+                                    variant="primary"
+                                    onClick={handleFinishSession}
+                                    className="practice__finish-button"
+                                >
+                                    Finish Session
+                                </Button>
+                            </InlineStack>
                         </InlineStack>
                     </Box>
                 </BlockStack>

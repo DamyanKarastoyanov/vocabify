@@ -33,6 +33,15 @@ class DatasetImportController extends Controller
                 middleLanguageCode: $data['middle_language_code']
             );
 
+            // Validation failed: no rows were imported; return 422 so client can show line errors
+            if (!empty($result['validation_failed']) && $result['imported_count'] === 0) {
+                return response()->json([
+                    'success'     => false,
+                    'message'     => 'Import validation failed. Fix the errors below and try again.',
+                    'line_errors' => $result['errors'],
+                ], 422);
+            }
+
             return response()->json([
                 'success'        => true,
                 'dataset_id'     => $dataset->id,

@@ -2,6 +2,7 @@
  * External dependencies
  */
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 /**
  * Internal dependencies
@@ -11,58 +12,78 @@ import Box from '@/components/box/box';
 import BlockStack from '@/components/block-stack/block-stack';
 import Text from '@/components/text/text';
 import Button from '@/components/button/button';
+import FormLabel from '@/components/form-label/form-label';
+import TextInput from '@/components/text-input/text-input';
+import InlineError from '@/components/inline-error/inline-error';
 import httpClient from '@/data/http-client';
 import { validateDatasetImport } from '@/pages/dataset-import/validations/dataset-import-validation';
 
+const defaultValues = {
+    name: '',
+    target_language_code: '',
+    content: '',
+    middle_language_code: '',
+};
+
+/** Splits register() so ref is passed as inputRef (avoids React's "ref is not a prop" warning). */
+function spreadRegister(registerFn, name) {
+    const { ref, ...rest } = registerFn(name);
+    return { inputRef: ref, ...rest };
+}
+
 const DatasetImport = () => {
-    const [isSubmitting, setIsSubmitting] = useState(false);
     const [result, setResult] = useState(null);
-    const [errors, setErrors] = useState({});
-    const [data, setData] = useState({
-        name: '',
-        target_language_code: '',
-        content: '',
-        middle_language_code: '',
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors, isSubmitting },
+        setError,
+        reset,
+    } = useForm({
+        defaultValues,
     });
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setErrors({});
+    const contentRegister = register('content');
+    const { ref: contentRef, ...contentRegisterProps } = contentRegister;
+
+    const onSubmit = async (data) => {
         setResult(null);
 
         const validationErrors = validateDatasetImport(data);
         if (Object.keys(validationErrors).length > 0) {
-            setErrors(validationErrors);
+            Object.entries(validationErrors).forEach(([field, message]) => {
+                setError(field, { type: 'manual', message });
+            });
             return;
         }
-
-        setIsSubmitting(true);
 
         try {
             const response = await httpClient.post('/datasets', data);
             setResult(response.data);
-            setData({
-                name: '',
-                target_language_code: '',
-                content: '',
-                middle_language_code: '',
-            });
-            setErrors({});
+            reset(defaultValues);
         } catch (error) {
             if (error.response?.data?.line_errors) {
-                // Validation errors from word parsing
                 setResult({
                     dataset_name: data.name,
                     line_errors: error.response.data.line_errors,
                 });
-                setErrors({ submit: error.response?.data?.message || 'Import failed due to validation errors.' });
+                setError('root', {
+                    type: 'manual',
+                    message: error.response?.data?.message || 'Import failed due to validation errors.',
+                });
             } else if (error.response?.data?.errors) {
-                setErrors(error.response.data.errors);
+                const raw = error.response.data.errors;
+                Object.entries(raw).forEach(([field, messages]) => {
+                    const message = Array.isArray(messages) ? messages[0] : messages;
+                    setError(field, { type: 'manual', message });
+                });
             } else {
-                setErrors({ submit: error.response?.data?.message || 'An error occurred during import.' });
+                setError('root', {
+                    type: 'manual',
+                    message: error.response?.data?.message || 'An error occurred during import.',
+                });
             }
-        } finally {
-            setIsSubmitting(false);
         }
     };
 
@@ -73,84 +94,62 @@ const DatasetImport = () => {
                     Import Dataset
                 </Text>
 
-                <Box as="form" onSubmit={handleSubmit} className="dataset-import__form">
+                <Box as="form" onSubmit={handleSubmit(onSubmit)} className="dataset-import__form" noValidate>
                     <BlockStack gap="500">
                         <Box className="dataset-import__field">
                             <BlockStack gap="200">
-                                <Text as="label" variant="body-m" fontWeight="semibold" color="text-primary" htmlFor="name">
-                                    Dataset Name
-                                </Text>
-                                <Box
-                                    as="input"
-                                    type="text"
+                                <FormLabel htmlFor="name">Dataset Name</FormLabel>
+                                <TextInput
                                     id="name"
-                                    name="name"
-                                    value={data.name}
-                                    onChange={(e) => setData({ ...data, name: e.target.value })}
-                                    className="dataset-import__input"
-                                    required
+                                    placeholder="e.g. JLPT N5 vocab"
+                                    invalid={!!errors.name?.message}
+                                    {...spreadRegister(register, 'name')}
                                 />
-                                {errors.name && (
-                                    <Text variant="body-s" color="text-error">
-                                        {errors.name}
-                                    </Text>
+                                {errors.name?.message && (
+                                    <InlineError>{errors.name.message}</InlineError>
                                 )}
                             </BlockStack>
                         </Box>
 
                         <Box className="dataset-import__field">
                             <BlockStack gap="200">
-                                <Text as="label" variant="body-m" fontWeight="semibold" color="text-primary" htmlFor="target_language_code">
-                                    Target Language Code
+                                <FormLabel htmlFor="target_language_code">Target language code</FormLabel>
+                                <Text variant="body-s" color="text-secondary">
+                                    2–5 letter code (e.g. ja, en, es) — not the full language name
                                 </Text>
-                                <Box
-                                    as="input"
-                                    type="text"
+                                <TextInput
                                     id="target_language_code"
-                                    name="target_language_code"
-                                    value={data.target_language_code}
-                                    onChange={(e) => setData({ ...data, target_language_code: e.target.value })}
-                                    className="dataset-import__input"
-                                    placeholder="e.g., ja, en, es"
-                                    required
+                                    placeholder="e.g. ja, en, es"
+                                    invalid={!!errors.target_language_code?.message}
+                                    {...spreadRegister(register, 'target_language_code')}
                                 />
-                                {errors.target_language_code && (
-                                    <Text variant="body-s" color="text-error">
-                                        {errors.target_language_code}
-                                    </Text>
+                                {errors.target_language_code?.message && (
+                                    <InlineError>{errors.target_language_code.message}</InlineError>
                                 )}
                             </BlockStack>
                         </Box>
 
                         <Box className="dataset-import__field">
                             <BlockStack gap="200">
-                                <Text as="label" variant="body-m" fontWeight="semibold" color="text-primary" htmlFor="middle_language_code">
-                                    Middle Language Code
+                                <FormLabel htmlFor="middle_language_code">Middle language code</FormLabel>
+                                <Text variant="body-s" color="text-secondary">
+                                    2–5 letter code (e.g. en) — not the full language name
                                 </Text>
-                                <Box
-                                    as="input"
-                                    type="text"
+                                <TextInput
                                     id="middle_language_code"
-                                    name="middle_language_code"
-                                    value={data.middle_language_code}
-                                    onChange={(e) => setData({ ...data, middle_language_code: e.target.value })}
-                                    className="dataset-import__input"
-                                    placeholder="e.g., en"
-                                    required
+                                    placeholder="e.g. en"
+                                    invalid={!!errors.middle_language_code?.message}
+                                    {...spreadRegister(register, 'middle_language_code')}
                                 />
-                                {errors.middle_language_code && (
-                                    <Text variant="body-s" color="text-error">
-                                        {errors.middle_language_code}
-                                    </Text>
+                                {errors.middle_language_code?.message && (
+                                    <InlineError>{errors.middle_language_code.message}</InlineError>
                                 )}
                             </BlockStack>
                         </Box>
 
                         <Box className="dataset-import__field">
                             <BlockStack gap="200">
-                                <Text as="label" variant="body-m" fontWeight="semibold" color="text-primary" htmlFor="content">
-                                    Dataset Content
-                                </Text>
+                                <FormLabel htmlFor="content">Dataset Content</FormLabel>
                                 <Text variant="body-s" color="text-secondary">
                                     Format: reading,kanji,native[,middle][ | tag1,tag2,tag3]
                                 </Text>
@@ -163,33 +162,32 @@ const DatasetImport = () => {
 いぬ,犬,куче,to run
 みず,水,вода`}
                                 </Box>
-                                <Box
-                                    as="textarea"
+                                <textarea
                                     id="content"
-                                    name="content"
-                                    value={data.content}
-                                    onChange={(e) => setData({ ...data, content: e.target.value })}
                                     className="dataset-import__textarea"
                                     rows={15}
-                                    required
+                                    placeholder="Paste your lines here. Format: reading,kanji,native[,middle][ | tag1,tag2]"
+                                    ref={contentRef}
+                                    {...contentRegisterProps}
                                 />
-                                {errors.content && (
-                                    <Text variant="body-s" color="text-error">
-                                        {errors.content}
-                                    </Text>
+                                {errors.content?.message && (
+                                    <InlineError>{errors.content.message}</InlineError>
                                 )}
                             </BlockStack>
                         </Box>
 
-                        {errors.submit && (
+                        {errors.root?.message && (
                             <Box className="dataset-import__error">
-                                <Text variant="body-m" color="text-error">
-                                    {errors.submit}
-                                </Text>
+                                <InlineError variant="body-m">{errors.root.message}</InlineError>
                             </Box>
                         )}
 
-                        <Button type="submit" variant="primary" loading={isSubmitting} disabled={isSubmitting}>
+                        <Button
+                            type="submit"
+                            variant="primary"
+                            loading={isSubmitting}
+                            disabled={isSubmitting}
+                        >
                             Import Dataset
                         </Button>
                     </BlockStack>
@@ -203,7 +201,7 @@ const DatasetImport = () => {
                             </Text>
                             <BlockStack gap="300">
                                 <Text variant="body-m" color="text-primary">
-                                    <strong>Dataset:</strong> {result.dataset_name})
+                                    <strong>Dataset:</strong> {result.dataset_name}
                                 </Text>
                                 <Text variant="body-m" color="text-success">
                                     <strong>Imported:</strong> {result.imported_count} words
@@ -225,12 +223,12 @@ const DatasetImport = () => {
                                                         Line {error.line}: {error.reason}
                                                     </Text>
                                                     {error.content && (
-                                                        <Box 
-                                                            as="pre" 
-                                                            padding="200" 
-                                                            backgroundColor="surface-200" 
-                                                            borderRadius="100" 
-                                                            fontSize="12px" 
+                                                        <Box
+                                                            as="pre"
+                                                            padding="200"
+                                                            backgroundColor="surface-200"
+                                                            borderRadius="100"
+                                                            fontSize="12px"
                                                             fontFamily="monospace"
                                                             overflow="auto"
                                                         >

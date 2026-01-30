@@ -3,37 +3,27 @@ import Text from '@/components/text/text';
 import TextInput from '@/components/text-input/text-input';
 import Button from '@/components/button/button';
 import BlockStack from '@/components/block-stack/block-stack';
-import InlineStack from '@/components/inline-stack/inline-stack';
 
 const WordRow = (props) => {
-    const { wordData, direction, mode, answer, onAnswerChange, onReveal, onHint, isRevealed = false, isHintShown = false, enableHints = true } = props;
+    const { wordData, direction, mode, answer, onAnswerChange, onReveal, isRevealed = false } = props;
     
     const word = wordData.word;
     const nativeGloss = word.glosses?.find((g) => g.role === 'native');
     const middleGloss = word.glosses?.find((g) => g.role === 'middle');
-    const targetGloss = word.glosses?.find((g) => g.role === 'target');
     
     const isTargetToNative = direction === 'target-to-native';
     const shownText = isTargetToNative ? word.primary_reading : (nativeGloss?.meaning_text || middleGloss?.meaning_text || '');
     const shownLanguageCode = isTargetToNative ? word.target_language_code : (nativeGloss?.language_code || middleGloss?.language_code || '');
-    const hiddenText = isTargetToNative 
+    const rightAnswerText = isTargetToNative 
         ? (nativeGloss?.meaning_text || middleGloss?.meaning_text || '')
         : word.primary_reading;
-    const hiddenLanguageCode = isTargetToNative 
+    const rightAnswerLanguageCode = isTargetToNative 
         ? (nativeGloss?.language_code || middleGloss?.language_code || '')
         : word.target_language_code;
-    
-    const hasMiddleGloss = !!middleGloss;
     
     const handleReveal = () => {
         if (onReveal) {
             onReveal();
-        }
-    };
-    
-    const handleHint = () => {
-        if (onHint) {
-            onHint();
         }
     };
     
@@ -47,96 +37,106 @@ const WordRow = (props) => {
     
     return (
         <Box className="word-row">
-            {/* Prompt Row */}
-            <Box className="word-row__prompt-row">
-                <InlineStack align="space-between" blockAlign="center" gap="400">
-                    <InlineStack gap="200" blockAlign="center">
-                        <Box className="word-row__language-badge">
-                            <Text variant="body-s" fontWeight="medium">
-                                {shownLanguageCode.toUpperCase()}
-                            </Text>
-                        </Box>
-                        <Text variant="body-l" fontWeight="bold" className="word-row__shown-word">
-                            {shownText}
+            <BlockStack className="word-row__content" gap="400">
+                <BlockStack
+                    gap="200"
+                    inlineAlign="center"
+                    style={{ textAlign: 'center' }}
+                >
+                    <Box
+                        paddingBlock="100"
+                        paddingInline="200"
+                        backgroundColor="surface-100"
+                        borderRadius="full"
+                    >
+                        <Text variant="body-s" fontWeight="medium">
+                            {shownLanguageCode.toUpperCase()}
                         </Text>
-                    </InlineStack>
-                    
-                    <Box className="word-row__hidden-section">
-                        {!isRevealed ? (
-                            <Text variant="body-m" color="text-secondary" className="word-row__hidden-dots">
-                                • • • • • •
-                            </Text>
-                        ) : (
-                            <InlineStack gap="200" blockAlign="center">
-                                <Box className="word-row__language-badge">
-                                    <Text variant="body-s" fontWeight="medium">
-                                        {hiddenLanguageCode.toUpperCase()}
-                                    </Text>
-                                </Box>
-                                <Text variant="body-l" fontWeight="bold" className="word-row__hidden-word">
-                                    {hiddenText}
-                                </Text>
-                            </InlineStack>
-                        )}
                     </Box>
-                    
-                    <InlineStack gap="200" blockAlign="center">
-                        {hasMiddleGloss && enableHints && (
-                            <Button 
-                                variant="secondary" 
-                                onClick={handleHint}
-                                className={isHintShown ? "word-row__hide-hint-button" : "word-row__show-hint-button"}
-                            >
-                                {isHintShown ? 'Hide hint' : 'Show hint'}
-                            </Button>
-                        )}
-                        <Button 
-                            variant="primary" 
-                            onClick={handleReveal}
-                            className="word-row__reveal-button"
+                    <Text variant="body-l" fontWeight="bold" align="center">
+                        {shownText}
+                    </Text>
+                    <Box
+                        className="word-row__kanji-row"
+                        style={{
+                            minHeight: 88,
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: 8,
+                        }}
+                    >
+                        <Box
+                            paddingBlock="100"
+                            paddingInline="200"
+                            backgroundColor="surface-100"
+                            borderRadius="full"
                         >
-                            {isRevealed ? 'Hide' : 'Reveal'}
-                        </Button>
-                    </InlineStack>
-                </InlineStack>
-            </Box>
-            
-            {/* Hint Row */}
-            {isHintShown && hasMiddleGloss && enableHints && (
-                <Box className="word-row__hint-row">
-                    <InlineStack gap="200" blockAlign="center">
-                        <Box className="word-row__hint-accent" />
-                        <Box className="word-row__language-badge word-row__language-badge--hint">
                             <Text variant="body-s" fontWeight="medium">
-                                {middleGloss.language_code.toUpperCase()}
+                                ALTERNATIVE
                             </Text>
                         </Box>
-                        <Text variant="body-s" color="text-secondary" className="word-row__hint-text">
-                            {middleGloss.meaning_text}
+                        <Box opacity={0.85}>
+                            <Text variant="body-l" fontWeight="bold" align="center">
+                                {word.alternative_writing || word.primary_reading}
+                            </Text>
+                        </Box>
+                    </Box>
+                </BlockStack>
+
+                <Box className="word-row__button-group">
+                    <Button variant="primary" onClick={handleReveal}>
+                        Reveal
+                    </Button>
+                </Box>
+
+                <Box
+                    className={`word-row__right-answer ${!isRevealed ? 'word-row__right-answer--hidden' : ''}`}
+                    aria-hidden={!isRevealed}
+                >
+                    <BlockStack gap="200" inlineAlign="center" style={{ textAlign: 'center' }}>
+                        <Box
+                            paddingBlock="100"
+                            paddingInline="200"
+                            backgroundColor="surface-100"
+                            borderRadius="full"
+                        >
+                            <Text variant="body-s" fontWeight="medium">
+                                {rightAnswerLanguageCode.toUpperCase()}
+                            </Text>
+                        </Box>
+                        <Text
+                            variant="body-l"
+                            fontWeight="bold"
+                            align="center"
+                            style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}
+                        >
+                            {rightAnswerText}
                         </Text>
-                    </InlineStack>
+                    </BlockStack>
                 </Box>
-            )}
-            
-            {/* Answer Row */}
-            {isTypingMode && (
-                <Box className="word-row__answer-row">
-                    <TextInput
-                        value={answer || ''}
-                        onChange={handleAnswerChange}
-                        placeholder="Type your answer..."
-                        className="word-row__answer-input"
-                    />
-                </Box>
-            )}
-            
-            {!isTypingMode && (
-                <Box className="word-row__paper-mode">
-                    <Text variant="body-s" color="text-secondary">
-                        Paper mode – no typing
-                    </Text>
-                </Box>
-            )}
+
+                <Box className="word-row__footer-spacer" />
+
+                {isTypingMode && (
+                    <Box paddingBlockStart="300" style={{ width: '100%' }}>
+                        <TextInput
+                            value={answer || ''}
+                            onChange={handleAnswerChange}
+                            placeholder="Type your answer..."
+                        />
+                    </Box>
+                )}
+
+                {!isTypingMode && (
+                    <Box paddingBlockStart="300">
+                        <Text variant="body-s" color="text-secondary" align="center">
+                            Paper mode – no typing
+                        </Text>
+                    </Box>
+                )}
+            </BlockStack>
         </Box>
     );
 };

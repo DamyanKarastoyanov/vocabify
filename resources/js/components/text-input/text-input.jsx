@@ -7,6 +7,17 @@ import classNames from 'classnames';
 /**
  * Internal dependencies
  */
+const mergeRefs = (refA, refB) => (el) => {
+    if (refA != null) {
+        if (typeof refA === 'function') refA(el);
+        else refA.current = el;
+    }
+    if (refB != null) {
+        if (typeof refB === 'function') refB(el);
+        else refB.current = el;
+    }
+};
+
 const TextInput = forwardRef((props, ref) => {
     const {
         type = 'text',
@@ -14,17 +25,32 @@ const TextInput = forwardRef((props, ref) => {
         name,
         value,
         defaultValue,
-        placeholder,
+        placeholder = ' ',
         disabled = false,
+        invalid = false,
         error,
+        prefix,
+        suffix,
         className,
+        inputRef,
         ...restProps
     } = props;
 
+    const mergedRef = ref != null || inputRef != null ? mergeRefs(ref, inputRef) : ref;
+    const showInvalid = invalid || !!error;
+
     return (
-        <div className={classNames('vf-text-input', className)}>
+        <div
+            className={classNames(
+                'vf-text-input',
+                disabled && 'vf-text-input--disabled',
+                showInvalid && 'vf-text-input--invalid',
+                className
+            )}
+        >
+            {prefix && <span className="vf-text-input__affix vf-text-input__affix--prefix">{prefix}</span>}
             <input
-                ref={ref}
+                ref={mergedRef}
                 type={type}
                 id={id}
                 name={name}
@@ -34,13 +60,11 @@ const TextInput = forwardRef((props, ref) => {
                 disabled={disabled}
                 className={classNames(
                     'vf-text-input__input',
-                    error && 'vf-text-input__input--error'
+                    showInvalid && 'vf-text-input__input--error'
                 )}
                 {...restProps}
             />
-            {error && (
-                <span className="vf-text-input__error">{error}</span>
-            )}
+            {suffix && <span className="vf-text-input__affix vf-text-input__affix--suffix">{suffix}</span>}
         </div>
     );
 });

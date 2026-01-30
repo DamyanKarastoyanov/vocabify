@@ -42,6 +42,11 @@
     --vf-color-info-500: #38bdf8;
     --vf-color-info-100: #e0f2fe;
 
+    /* Error (form validation) */
+    --vf-color-text-error: var(--vf-color-danger-500);
+    --vf-color-border-error: var(--vf-color-danger-500);
+    --vf-color-shadow-error: rgba(239, 68, 68, 0.25);
+
     /* Aliases */
     --vf-color-primary: var(--vf-color-brand-500);
     --vf-color-white: #ffffff;

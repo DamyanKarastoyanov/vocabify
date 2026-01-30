@@ -38,9 +38,8 @@ const Datasets = () => {
         router.visit('/datasets/create');
     };
 
-    const handleImportCSV = () => {
-        // TODO: Implement CSV import
-        console.log('Import CSV');
+    const handleImportDataset = () => {
+        router.visit('/datasets/create');
     };
 
     const handleOpenDataset = (dataset) => {
@@ -77,10 +76,10 @@ const Datasets = () => {
                     <InlineStack align="end" gap="300">
                         <Button 
                             variant="secondary" 
-                            onClick={handleImportCSV}
+                            onClick={handleImportDataset}
                             prefix={<Icon size="400" icon={IconUpload} />}
                         >
-                            Import from CSV
+                            Import dataset
                         </Button>
                         <Button variant="primary" onClick={handleNewDataset}>
                             + New dataset

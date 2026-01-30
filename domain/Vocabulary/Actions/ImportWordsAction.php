@@ -23,30 +23,26 @@ class ImportWordsAction
         $targetLanguageCode = $dataset->target_language_code;
         $nativeLanguageCode = 'bg';
 
-        $importedCount = 0;
-        $skippedCount  = 0;
-        $errors        = [];
+        $errors = [];
+        $validRows = [];
 
+        // First pass: validate every line and collect valid parsed rows
         foreach ($lines as $index => $rawLine) {
             $lineNumber = $index + 1;
             $line = trim($rawLine);
 
-            // Skip blank lines
             if ($line === '') {
                 continue;
             }
 
-            // Split on first | to separate word part from tags part
             $pipeParts = explode('|', $line, 2);
             $wordPart = trim($pipeParts[0]);
             $tagsPart = isset($pipeParts[1]) ? trim($pipeParts[1]) : '';
+            // Allow commas inside fields: treat as 3 or 4 fields — last segment = middle when 4+
+            $segments = array_map('trim', explode(',', $wordPart));
+            $segmentCount = count($segments);
 
-            // Parse word part (comma-separated)
-            $wordFields = array_map('trim', explode(',', $wordPart));
-
-            // Validate word part: must have 3 or 4 fields
-            if (count($wordFields) < 3 || count($wordFields) > 4) {
-                $skippedCount++;
+            if ($segmentCount < 3) {
                 $errors[] = [
                     'line'    => $lineNumber,
                     'reason'  => 'Word part must have 3 or 4 comma-separated fields: reading,kanji,native[,middle]',
@@ -55,16 +51,19 @@ class ImportWordsAction
                 continue;
             }
 
-            [$reading, $kanji, $native, $middle] = array_pad($wordFields, 4, null);
+            if ($segmentCount === 3) {
+                $reading = $segments[0];
+                $kanji = $segments[1];
+                $native = $segments[2];
+                $middle = null;
+            } else {
+                $middle = array_pop($segments);
+                $reading = $segments[0];
+                $kanji = $segments[1];
+                $native = implode(',', array_slice($segments, 2));
+            }
 
-            $reading = trim((string) $reading);
-            $kanji = trim((string) $kanji);
-            $native = trim((string) $native);
-            $middle = $middle !== null ? trim((string) $middle) : null;
-
-            // Validate required fields
             if ($reading === '' || $native === '') {
-                $skippedCount++;
                 $errors[] = [
                     'line'    => $lineNumber,
                     'reason'  => 'Reading and native fields are required and cannot be empty',
@@ -73,46 +72,62 @@ class ImportWordsAction
                 continue;
             }
 
-            // Optional strictness: check if all fields are empty (skip as blank line)
             $allEmpty = $reading === '' && $kanji === '' && $native === '' && ($middle === null || $middle === '');
             if ($allEmpty) {
                 continue;
             }
 
-            // Create word
+            $validRows[] = [
+                'reading'  => $reading,
+                'kanji'    => $kanji,
+                'native'   => $native,
+                'middle'   => $middle,
+                'tagsPart' => $tagsPart,
+            ];
+        }
+
+        // If any validation errors: hold up import — do not write to DB
+        if ($errors !== []) {
+            return [
+                'imported_count' => 0,
+                'skipped_count'  => count($errors),
+                'errors'         => $errors,
+                'validation_failed' => true,
+            ];
+        }
+
+        // Second pass: create words and glosses only when validation passed
+        $importedCount = 0;
+        foreach ($validRows as $row) {
             $word = $this->createWordAction->handle(
                 datasetId: $dataset->id,
                 targetLanguageCode: $targetLanguageCode,
-                primaryReading: $reading,
-                alternativeWriting: $kanji === '' ? null : $kanji,
+                primaryReading: $row['reading'],
+                alternativeWriting: $row['kanji'] === '' ? null : $row['kanji'],
                 romanization: null
             );
 
-            // Create native gloss
             $this->createGlossAction->handle(
                 word: $word,
                 languageCode: $nativeLanguageCode,
-                meaningText: $native,
+                meaningText: $row['native'],
                 role: Gloss::ROLE_NATIVE,
                 isPrimary: true
             );
 
-            // Create middle gloss if present
-            if ($middle !== null && $middle !== '') {
+            if ($row['middle'] !== null && $row['middle'] !== '') {
                 $this->createGlossAction->handle(
                     word: $word,
                     languageCode: $middleLanguageCode,
-                    meaningText: $middle,
+                    meaningText: $row['middle'],
                     role: Gloss::ROLE_MIDDLE,
                     isPrimary: true
                 );
             }
 
-            // Parse and attach tags
-            if ($tagsPart !== '') {
-                $tagNames = array_map('trim', explode(',', $tagsPart));
+            if ($row['tagsPart'] !== '') {
+                $tagNames = array_map('trim', explode(',', $row['tagsPart']));
                 $tagNames = array_filter($tagNames, fn($tag) => $tag !== '');
-
                 foreach ($tagNames as $tagName) {
                     $tag = $this->findOrCreateTagAction->handle(
                         datasetId: $dataset->id,
@@ -129,8 +144,8 @@ class ImportWordsAction
 
         return [
             'imported_count' => $importedCount,
-            'skipped_count'  => $skippedCount,
-            'errors'         => $errors,
+            'skipped_count'  => 0,
+            'errors'         => [],
         ];
     }
 }
