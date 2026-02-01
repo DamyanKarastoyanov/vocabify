@@ -11,12 +11,15 @@ class PracticeSession extends Model
     protected $fillable = [
         'dataset_id',
         'user_id',
-        'items_count',
+        'mode',
+        'total_items',
+        'config',
         'started_at',
         'completed_at',
     ];
 
     protected $casts = [
+        'config' => 'array',
         'started_at' => 'datetime',
         'completed_at' => 'datetime',
     ];
@@ -31,16 +34,21 @@ class PracticeSession extends Model
         return $this->belongsTo(\App\Models\User::class);
     }
 
-    public function practiceSessionWords(): HasMany
+    public function practiceSessionItems(): HasMany
     {
-        return $this->hasMany(PracticeSessionWord::class)->orderBy('order_index');
+        return $this->hasMany(PracticeSessionItem::class)->orderBy('position');
+    }
+
+    public function items(): HasMany
+    {
+        return $this->practiceSessionItems();
     }
 
     public function words(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(Word::class, 'practice_session_words')
-            ->withPivot(['order_index', 'result', 'answered_at'])
+        return $this->belongsToMany(Word::class, 'practice_session_items')
+            ->withPivot(['position', 'shown_side', 'is_correct', 'response_ms', 'result', 'answered_at'])
             ->withTimestamps()
-            ->orderByPivot('order_index');
+            ->orderByPivot('position');
     }
 }

@@ -71,6 +71,43 @@
             background-color: var(--vf-color-brand-600);
         }
     }
+
+    &__new-session-button {
+        min-width: 160px;
+        width: auto;
+        box-sizing: border-box;
+        background-color: var(--vf-color-brand-500);
+        color: var(--vf-color-black);
+        border-radius: 9999px;
+        padding: 12px 24px;
+        font-weight: 600;
+        border: none;
+        transition: background-color 0.2s;
+        white-space: nowrap;
+
+        &:hover {
+            background-color: var(--vf-color-brand-600);
+        }
+    }
+
+    &__download-button {
+        min-width: 130px;
+        width: 130px;
+        box-sizing: border-box;
+        background-color: var(--vf-color-brand-500);
+        color: var(--vf-color-black);
+        border-radius: 9999px;
+        padding: 12px 24px;
+        font-weight: 600;
+        border: none;
+        transition: background-color 0.2s;
+        text-decoration: none;
+        
+
+        &:hover {
+            background-color: var(--vf-color-brand-600);
+        }
+    }
 }
 
 // Word Row: card container only; layout/styling via component props (BlockStack, InlineStack, Box, Text, Button)
@@ -140,6 +177,31 @@
 
     &__right-answer--hidden {
         visibility: hidden;
+    }
+
+    &__alternate-trigger {
+        position: relative;
+        cursor: pointer;
+    }
+
+    &__alternate-tooltip {
+        position: fixed;
+        z-index: 9999;
+        padding: 1.5rem 2rem;
+        background: var(--vf-color-surface-0, #fff);
+        border: 1px solid var(--vf-color-border-subtle, #e5e7eb);
+        border-radius: 16px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        font-size: clamp(2.5rem, 8vw, 5rem);
+        font-weight: 700;
+        line-height: 1.2;
+        text-align: center;
+        pointer-events: none;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        max-width: 95vw;
+        word-break: break-word;
     }
 }
 

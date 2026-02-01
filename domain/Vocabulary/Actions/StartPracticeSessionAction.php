@@ -4,44 +4,42 @@ namespace Domain\Vocabulary\Actions;
 
 use Domain\Vocabulary\Models\Dataset;
 use Domain\Vocabulary\Models\PracticeSession;
-use Domain\Vocabulary\Models\PracticeSessionWord;
-use Illuminate\Support\Collection;
+use Domain\Vocabulary\Models\PracticeSessionItem;
 
 class StartPracticeSessionAction
 {
     public function handle(
         Dataset $dataset,
         int $itemsCount,
-        ?int $userId = null
+        ?int $userId = null,
+        ?string $mode = null,
+        ?array $config = null
     ): PracticeSession {
-        // Get actual count to handle cases where dataset has fewer words than requested
         $availableWordsCount = $dataset->words()->count();
         $actualItemsCount = min($itemsCount, $availableWordsCount);
-        
-        // Create the practice session
+
         $practiceSession = PracticeSession::create([
             'dataset_id' => $dataset->id,
             'user_id' => $userId,
-            'items_count' => $actualItemsCount,
+            'mode' => $mode,
+            'total_items' => $actualItemsCount,
+            'config' => $config,
             'started_at' => now(),
         ]);
 
-        // Select random words from the dataset
         $words = $dataset->words()
             ->inRandomOrder()
             ->limit($actualItemsCount)
             ->get();
 
-        // Create PracticeSessionWord records with order_index
         $words->each(function ($word, $index) use ($practiceSession) {
-            PracticeSessionWord::create([
+            PracticeSessionItem::create([
                 'practice_session_id' => $practiceSession->id,
                 'word_id' => $word->id,
-                'order_index' => $index + 1,
+                'position' => $index + 1,
             ]);
         });
 
-        // Reload the session with relationships
-        return $practiceSession->load(['practiceSessionWords.word.glosses']);
+        return $practiceSession->load(['practiceSessionItems.word.glosses']);
     }
 }

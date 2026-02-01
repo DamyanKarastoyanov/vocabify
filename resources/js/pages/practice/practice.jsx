@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { usePage, router } from '@inertiajs/react';
+import { useRoute } from 'ziggy-js';
 import httpClient from '@/data/http-client';
 import Layout from '@/layouts/layout/layout';
 import Box from '@/components/box/box';
@@ -20,6 +21,7 @@ const Practice = (props) => {
     const words = practiceSession?.words || [];
     const [answers, setAnswers] = useState({});
     const [revealed, setRevealed] = useState({});
+    const route = useRoute();
     const [recallDirections] = useState(() => {
         if (recallDirectionConfig === 'mixed') {
             return words.map(() => Math.random() < 0.5 ? 'target-to-native' : 'native-to-target');
@@ -31,6 +33,7 @@ const Practice = (props) => {
     const totalWords = words.length;
     const revealedCount = Object.keys(revealed).filter(key => revealed[key]).length;
     const allRevealed = totalWords > 0 && revealedCount === totalWords;
+    const enableHints = props_data.enableHints !== undefined ? props_data.enableHints : true;
 
     const handleAnswerChange = (wordId, answer) => {
         setAnswers((prev) => ({
@@ -39,7 +42,7 @@ const Practice = (props) => {
         }));
     };
 
-    const handleReveal = (wordId, practiceSessionWordId) => {
+    const handleReveal = (wordId, practiceSessionItemId) => {
         const newRevealedState = !revealed[wordId];
         setRevealed((prev) => ({
             ...prev,
@@ -47,8 +50,8 @@ const Practice = (props) => {
         }));
 
         // When revealing (marking as answered), save to database
-        if (newRevealedState && practiceSessionWordId) {
-            httpClient.post(`/practice-session-words/${practiceSessionWordId}/answer`, {
+        if (newRevealedState && practiceSessionItemId) {
+            httpClient.post(`/practice-session-items/${practiceSessionItemId}/answer`, {
                 result: 'skipped'
             }).catch((error) => {
                 console.error('Failed to save answer:', error);
@@ -57,7 +60,7 @@ const Practice = (props) => {
     };
 
     const handleBack = () => {
-        router.visit(`/datasets/${dataset.id}`);
+        router.visit('/practices');
     };
 
     const handleToggleRevealAll = () => {
@@ -68,10 +71,10 @@ const Practice = (props) => {
         const nextRevealed = {};
         words.forEach((wordData) => {
             const wordId = wordData.word.id;
-            const practiceSessionWordId = wordData.practice_session_word_id;
+            const practiceSessionItemId = wordData.practice_session_item_id;
             nextRevealed[wordId] = true;
-            if (practiceSessionWordId) {
-                httpClient.post(`/practice-session-words/${practiceSessionWordId}/answer`, {
+            if (practiceSessionItemId) {
+                httpClient.post(`/practice-session-items/${practiceSessionItemId}/answer`, {
                     result: 'skipped'
                 }).catch((error) => {
                     console.error('Failed to save answer:', error);
@@ -79,6 +82,15 @@ const Practice = (props) => {
             }
         });
         setRevealed(nextRevealed);
+    };
+
+    const handleNewSession = () => {
+        router.post(`/datasets/${dataset.id}/practice-sessions`, {
+            itemsPerSession: totalWords,
+            recallDirection: recallDirectionConfig,
+            mode: modeConfig,
+            enableHints,
+        });
     };
 
     const handleFinishSession = async () => {
@@ -89,8 +101,8 @@ const Practice = (props) => {
             console.error('Failed to complete session:', error);
         }
         
-        // Navigate to review (when implemented) or back to dataset
-        router.visit(`/datasets/${dataset.id}`);
+        // Navigate to practices list
+        router.visit('/practices');
     };
 
     if (!practiceSession || words.length === 0) {
@@ -103,7 +115,7 @@ const Practice = (props) => {
                             No words available for practice.
                         </Text>
                         <Button variant="secondary" onClick={handleBack}>
-                            Back to Dataset
+                            Back to Practices
                         </Button>
                     </BlockStack>
                 </Box>
@@ -118,7 +130,7 @@ const Practice = (props) => {
                     <Box className="practice__header-wrapper" maxWidth="1280px" dangerouslySetInlineStyle={{ __style: { margin: '0 auto' } }}>
                         <BlockStack gap="200" className="practice__header">
                             <Button variant="plain" onClick={handleBack}>
-                                ← Back to Dataset
+                                ← Back to Practices
                             </Button>
                             <Text variant="heading-l" fontWeight="bold">{dataset.name}</Text>
                             <Text variant="body-s" color="text-secondary">
@@ -129,28 +141,44 @@ const Practice = (props) => {
 
                     <Box className="practice__body">
                         <Box className="practice__list-header">
-                            <Button
-                                variant="primary"
-                                onClick={handleToggleRevealAll}
-                                className="practice__reveal-all-button"
-                            >
-                                {allRevealed ? 'Hide all' : 'Reveal all'}
-                            </Button>
+                            <InlineStack gap="200" blockAlign="center">
+                                <Button
+                                    variant="primary"
+                                    className="practice__download-button"
+                                    onClick={() => { window.location.href = route('practice.pdf', { practiceSession: practiceSession.id }); }}
+                                >
+                                    Download
+                                </Button>
+                                <Button
+                                    variant="primary"
+                                    className="practice__reveal-all-button"
+                                    onClick={handleToggleRevealAll}
+                                >
+                                    {allRevealed ? 'Hide all' : 'Reveal all'}
+                                </Button>
+                                <Button
+                                    variant="primary"
+                                    className="practice__new-session-button"
+                                    onClick={handleNewSession}
+                                >
+                                    New session
+                                </Button>
+                            </InlineStack>
                         </Box>
                         <Box className="practice__word-list">
                             {words.map((wordData, index) => {
                                 const wordId = wordData.word.id;
-                                const practiceSessionWordId = wordData.practice_session_word_id;
+                                const practiceSessionItemId = wordData.practice_session_item_id;
                                 return (
                                     <WordRow
-                                        key={practiceSessionWordId || index}
+                                        key={practiceSessionItemId || index}
                                         wordData={wordData}
                                         direction={recallDirections[index]}
                                         mode={modeConfig}
                                         answer={answers[wordId] || ''}
                                         isRevealed={revealed[wordId] || false}
                                         onAnswerChange={(answer) => handleAnswerChange(wordId, answer)}
-                                        onReveal={() => handleReveal(wordId, practiceSessionWordId)}
+                                        onReveal={() => handleReveal(wordId, practiceSessionItemId)}
                                     />
                                 );
                             })}
@@ -163,13 +191,6 @@ const Practice = (props) => {
                                 Summary: {revealedCount} / {totalWords} revealed
                             </Text>
                             <InlineStack gap="200" blockAlign="center">
-                                <Button
-                                    variant="primary"
-                                    onClick={handleToggleRevealAll}
-                                    className="practice__reveal-all-button"
-                                >
-                                    {allRevealed ? 'Hide all' : 'Reveal all'}
-                                </Button>
                                 <Button
                                     variant="primary"
                                     onClick={handleFinishSession}

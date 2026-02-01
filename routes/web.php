@@ -5,6 +5,8 @@ use Inertia\Inertia;
 use App\Http\Controllers\Vocabulary\DatasetImportController;
 use App\Http\Web\Datasets\Controllers\DatasetsController;
 use App\Http\Web\Practice\Controllers\PracticeController;
+use App\Http\Web\Practice\Controllers\PracticePdfController;
+use App\Http\Web\Practice\Controllers\PracticeSessionsController;
 use App\Http\Web\Auth\Controllers\LoginController;
 use App\Http\Web\Auth\Controllers\RegisterController;
 
@@ -33,10 +35,16 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/datasets/{dataset}/import-words', [DatasetImportController::class, 'store'])
         ->name('datasets.import-words');
     
-    Route::get('/practice/{dataset}', [PracticeController::class, 'create'])
-        ->name('practice.create');
-    Route::post('/practice-session-words/{practiceSessionWord}/answer', [PracticeController::class, 'answerWord'])
+    Route::get('/practices', [PracticeSessionsController::class, 'index'])
+        ->name('practices.index');
+    Route::post('/datasets/{dataset}/practice-sessions', [PracticeController::class, 'store'])
+        ->name('practice-sessions.store');
+    Route::get('/practice-sessions/{practiceSession}', [PracticeController::class, 'show'])
+        ->name('practice-sessions.show');
+    Route::post('/practice-session-items/{practiceSessionItem}/answer', [PracticeController::class, 'answerWord'])
         ->name('practice.answer-word');
     Route::post('/practice-sessions/{practiceSession}/complete', [PracticeController::class, 'complete'])
         ->name('practice.complete');
+    Route::get('/practice-sessions/{practiceSession}/pdf', PracticePdfController::class)
+        ->name('practice.pdf');
 });

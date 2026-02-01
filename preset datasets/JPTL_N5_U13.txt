@@ -1,0 +1,44 @@
+ごろ,頃,около,around | grammar-pattern,time-expression
+なにか,何か,нещо,something | pronoun
+どこか,何処か,някъде,somewhere | pronoun,location-expression
+おなかがすきました。,お腹が空きました。,огладнях,I'm hungry | expression,example
+おなかがいっぱいです。,お腹が一杯です。,нахраних се,I'm full | expression,example
+のどがかわきました。,喉が渇きました。,ожаднях,I'm thirsty | expression,example
+そうですね。,,да, така е,well / I agree | expression,dialogue,polite
+そうしましょう。,,така да направим,let's do that | expression,dialogue,polite
+ごちゅうもんは？,ご注文は？,Какво желаете?,What would you like to order? | expression,dialogue,polite
+ていしょく,定食,комплектно меню,set meal | noun,food
+ぎゅうどん,牛丼,варен ориз с телешко,beef bowl | noun,food
+すこしおまちください。,少々お待ち下さい。,Моля, почакайте,please wait a moment | expression,dialogue,polite
+べつべつに,別々に,отделно,separately | adverb
+ロシア,,Русия,Russia | proper_noun,country
+つるや,,име на измислен ресторан,Tsuruya | proper_noun,needs-review
+おはようテレビ,,име на измислен ТВ канал,Ohayō TV | proper_noun,needs-review
+あそびます,遊びます,играя,play | verb,dictionary
+およぎます,泳ぎます,плувам,swim | verb,dictionary
+むかえます,迎えます,посрещам,meet/pick up | verb,dictionary
+つかれます,疲れます,изморявам се,get tired | verb,dictionary
+だします,出します,изпращам/предавам,send/submit | verb,dictionary
+はいります,入ります,влизам,enter | verb,dictionary
+でます,出ます,излизам,exit | verb,dictionary
+けっこんします,結婚します,женя се,marry | verb,dictionary
+かいものします,買い物します,пазарувам,shop | verb,dictionary
+しょくじします,食事します,храня се,eat a meal | verb,dictionary
+さんぽします,散歩します,разхождам се,walk | verb,dictionary
+たいへんな,大変な,ужасен/труден,terrible/difficult | adjective,na-adjective
+ほしい,欲しい,искам нещо,want | adjective,i-adjective
+さびしい,寂しい,самотен,lonely | adjective,i-adjective
+ひろい,広い,широк,wide | adjective,i-adjective
+せまい,狭い,тесен,narrow | adjective,i-adjective
+しやくしょ,市役所,община,city hall | noun,location
+プール,,басейн,pool | noun,location
+かわ,川,река,river | noun,location
+けいざい,経済,икономика,economy | noun
+びじゅつ,美術,изобразително изкуство,art | noun
+つり,釣り,риболов,fishing | noun
+スキー,,ски,skiing | noun
+かいぎ,会議,събрание,meeting | noun
+とうろく,登録,регистрация,registration | noun
+しゅうまつ,週末,уикенд,weekend | noun,time-expression
+
+TOTAL ENTRIES: 42

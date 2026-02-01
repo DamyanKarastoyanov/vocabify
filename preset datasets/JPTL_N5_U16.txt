@@ -1,0 +1,67 @@
+のります,乗ります,качвам се/пътувам,ride | verb,masu-form
+でんしゃに～,電車に～,пътувам с влак,by train | grammar-pattern,example
+おります,降ります,слизам,get off | verb,masu-form
+でんしゃを～,電車を～,слизам от влака,get off train | grammar-pattern,example
+のりかえます,乗り換えます,прекачвам се,transfer | verb,masu-form
+あびます,浴びます,къпя се,take a shower | verb,masu-form
+シャワーを～,,вземам душ,take a shower | grammar-pattern,example
+いれます,入れます,слагам в,put in | verb,masu-form
+だします,出します,изпращам/изтеглям,send/take out | verb,masu-form
+はいります,入ります,влизам,enter | verb,masu-form
+だいがくに～,大学に～,постъпвам в университет,enter university | grammar-pattern,example
+でます,出ます,излизам/завършвам,leave/graduate | verb,masu-form
+だいがくを～,大学を～,завършвам университет,graduate university | grammar-pattern,example
+やめます,辞めます,напускам,quit | verb,masu-form
+かいしゃを～,会社を～,напускам работа,quit company | grammar-pattern,example
+おします,押します,натискам,press | verb,masu-form
+
+わかい,若い,млад,young | adjective,i-adjective
+ながい,長い,дълъг,long | adjective,i-adjective
+みじかい,短い,къс,short | adjective,i-adjective
+あかるい,明るい,светъл/ясен,bright | adjective,i-adjective
+くらい,暗い,тъмен,dark | adjective,i-adjective
+せがたかい,背が高い,висок (ръст),tall | expression,adjective
+あたまがいい,頭が良い,умен,smart | expression,adjective
+
+からだ,体,тяло,body | noun
+あたま,頭,глава,head | noun
+かみ,髪,коса,hair | noun
+かお,顔,лице,face | noun
+め,目,око/очи,eye | noun
+みみ,耳,ухо/уши,ear | noun
+くち,口,уста,mouth | noun
+は,歯,зъб/зъби,tooth | noun
+おなか,お腹,корем,stomach | noun
+あし,足,крак/крака,leg | noun
+
+サービス,,сервиз/обслужване,service | noun
+ジョギング,,джогинг,jogging | noun
+シャワー,,душ,shower | noun
+みどり,緑,зелен,green | noun,color
+おてら,お寺,будистки храм,Buddhist temple | noun,location
+じんじゃ,神社,шинтоистки храм,Shinto shrine | noun,location
+りゅうがくせい,留学生,чуждестранен студент,international student | noun
+～ばん,～番,номер,number | suffix
+どうやって,,как/по какъв начин,how | adverb,question
+どの～,,кой точно,which | determiner,question
+まだまだです,,все още не,not yet | expression
+
+おひきをだしですか？,,Искате да теглите пари ли?,Withdraw money? | expression,dialogue,polite
+まず,,първо,first | adverb
+キャッシュカード,,дебитна карта,cash card | noun
+あんしょうばんごう,暗証番号,ПИН код,pin code | noun
+つぎに,次に,след това,next | adverb
+きんがく,金額,парична сума,amount | noun
+かくにん,確認,потвърждение/проверка,confirmation | noun
+ボタン,,бутон,button | noun
+
+JR,,Японска железопътна компания,JR | proper_noun,organization
+アジア,,Азия,Asia | proper_noun,place
+バンドン,,Бандунг,Bandung | proper_noun,place
+ベラクルス,,Веракруз,Veracruz | proper_noun,place
+フランケン,,Франкен,Franken | proper_noun,place
+ベトナム,,Виетнам,Vietnam | proper_noun,country
+フエ,,Хюе,Hue | proper_noun,place
+だいがくまえ,大学前,спирка пред университет,university front | proper_noun,location
+
+TOTAL ENTRIES: 63

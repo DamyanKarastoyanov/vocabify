@@ -13,21 +13,26 @@ class PracticeSessionResource extends JsonResource
             'id' => $this->id,
             'dataset_id' => $this->dataset_id,
             'user_id' => $this->user_id,
-            'items_count' => $this->items_count,
+            'mode' => $this->mode,
+            'total_items' => $this->total_items,
+            'config' => $this->config,
             'started_at' => $this->started_at?->toIso8601String(),
             'completed_at' => $this->completed_at?->toIso8601String(),
-            'words' => $this->whenLoaded('practiceSessionWords', function () {
-                return $this->practiceSessionWords->map(function ($practiceSessionWord) {
+            'words' => $this->whenLoaded('practiceSessionItems', function () {
+                return $this->practiceSessionItems->map(function ($item) {
                     return [
-                        'practice_session_word_id' => $practiceSessionWord->id,
-                        'order_index' => $practiceSessionWord->order_index,
+                        'practice_session_item_id' => $item->id,
+                        'position' => $item->position,
+                        'shown_side' => $item->shown_side,
+                        'is_correct' => $item->is_correct,
+                        'response_ms' => $item->response_ms,
                         'word' => [
-                            'id' => $practiceSessionWord->word->id,
-                            'primary_reading' => $practiceSessionWord->word->primary_reading,
-                            'alternative_writing' => $practiceSessionWord->word->alternative_writing,
-                            'romanization' => $practiceSessionWord->word->romanization,
-                            'target_language_code' => $practiceSessionWord->word->target_language_code,
-                            'glosses' => $practiceSessionWord->word->glosses->map(function ($gloss) {
+                            'id' => $item->word->id,
+                            'primary_reading' => $item->word->primary_reading,
+                            'alternative_writing' => $item->word->alternative_writing,
+                            'romanization' => $item->word->romanization,
+                            'target_language_code' => $item->word->target_language_code,
+                            'glosses' => $item->word->glosses->map(function ($gloss) {
                                 return [
                                     'id' => $gloss->id,
                                     'language_code' => $gloss->language_code,

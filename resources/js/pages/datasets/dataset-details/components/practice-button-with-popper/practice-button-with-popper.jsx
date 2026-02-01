@@ -76,13 +76,11 @@ const PracticeButtonWithPopper = (props) => {
         
         setIsOpen(false);
         
-        router.visit(`/practice/${datasetId}`, {
-            data: { 
-                itemsPerSession: selectedItems,
-                recallDirection: selectedDirection,
-                mode: selectedMode,
-                enableHints: enableHints
-            },
+        router.post(`/datasets/${datasetId}/practice-sessions`, {
+            itemsPerSession: selectedItems,
+            recallDirection: selectedDirection,
+            mode: selectedMode,
+            enableHints: enableHints
         });
     };
 

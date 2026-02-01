@@ -43,16 +43,16 @@ class Word extends Model
         return $this->belongsToMany(Tag::class);
     }
 
-    public function practiceSessionWords(): HasMany
+    public function practiceSessionItems(): HasMany
     {
-        return $this->hasMany(PracticeSessionWord::class);
+        return $this->hasMany(PracticeSessionItem::class);
     }
 
     public function practiceSessions(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(PracticeSession::class, 'practice_session_words')
-            ->withPivot(['order_index', 'result', 'answered_at'])
+        return $this->belongsToMany(PracticeSession::class, 'practice_session_items')
+            ->withPivot(['position', 'shown_side', 'is_correct', 'response_ms', 'result', 'answered_at'])
             ->withTimestamps()
-            ->orderByPivot('order_index');
+            ->orderByPivot('position');
     }
 }

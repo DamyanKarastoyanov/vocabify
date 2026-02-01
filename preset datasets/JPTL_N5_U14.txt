@@ -1,0 +1,46 @@
+つけます,点けます,включвам (ток/осветление),turn on | verb,masu-form
+けします,消します,изключвам/гася,turn off | verb,masu-form
+あけます,開けます,отварям,open | verb,masu-form
+しめます,閉めます,затварям,close | verb,masu-form
+いそぎます,急ぎます,бързам,hurry | verb,masu-form
+まちます,待ちます,чакам,wait | verb,masu-form
+とめます,止めます,спирам,stop | verb,masu-form
+まがります,曲がります,завивам/прегъвам,turn | verb,masu-form
+みぎへ,,надясно,to the right | expression,direction
+もちます,持ちます,държа/нося,hold | verb,masu-form
+とります,取ります,вземам/хващам,take | verb,masu-form
+てつだいます,手伝います,помагам,help | verb,masu-form
+よびます,呼びます,викам/каня,call | verb,masu-form
+はなします,話します,говоря, speak | verb,masu-form
+みせます,見せます,показвам,show | verb,masu-form
+おしえます,教えます,обяснявам/преподавам,teach | verb,masu-form
+じゅうしょを～,住所を～,адрес,address | grammar-pattern,example
+はじめます,始めます,започвам,start | verb,masu-form
+ふります,降ります,вали (дъжд/сняг),fall | verb,masu-form
+コピーします,,копирам,copy | verb,masu-form
+エアコン,,климатик,air conditioner | noun
+パスポート,旅券,паспорт,passport | noun
+なまえ,名前,име,name | noun
+じゅうしょ,住所,адрес,address | noun
+ちず,地図,карта,map | noun
+しお,塩,сол,salt | noun
+さとう,砂糖,захар,sugar | noun
+
+よみかた,読み方,начин на четене,how to read | noun,grammar
+～かた,～方,начин на ~,way of doing | grammar-pattern
+ゆっくり,,бавно/спокойно,slowly | adverb
+すぐ,直ぐ,веднага,immediately | adverb
+また,又,отново,again | adverb
+あとで,後で,по-късно,later | adverb,time-expression
+もうすこし,もう少し,още малко,a little more | expression
+もう～,,вече ~,already | grammar-pattern
+
+いいですよ。,,Добре!/ОК!,OK | expression,dialogue
+さあ,,възклицание (колебание),well… | interjection,needs-review
+あれ？,,О!/А?,huh | interjection
+
+しんごうをみぎへまがってください。,信号を右へ曲がって下さい。,Моля, завийте надясно на светофара,please turn right at the traffic light | expression,dialogue,polite
+まっすぐ,真っ直ぐ,направо,straight ahead | adverb,direction
+これでおねがいします。,,Благодаря, достатъчно,this will do please | expression,dialogue,polite
+おつり,,Ресто,change | noun
+うめだ,梅田,Умеда (район в Осака),Umeda | proper_noun,location

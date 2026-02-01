@@ -1,4 +1,4 @@
-﻿/**
+/**
  * External dependencies
  */
 import { usePage, router, Link } from '@inertiajs/react';
@@ -31,11 +31,18 @@ const Layout = (props) => {
                             </Box>
                             <InlineStack gap="400" className="layout-header__nav">
                                 {user && (
-                                    <Link href="/datasets" className="layout-header__nav-link">
-                                        <Text variant="body-m" color="text-inverse">
-                                            Database
-                                        </Text>
-                                    </Link>
+                                    <>
+                                        <Link href="/datasets" className="layout-header__nav-link">
+                                            <Text variant="body-m" color="text-inverse">
+                                                Database
+                                            </Text>
+                                        </Link>
+                                        <Link href="/practices" className="layout-header__nav-link">
+                                            <Text variant="body-m" color="text-inverse">
+                                                Practices
+                                            </Text>
+                                        </Link>
+                                    </>
                                 )}
                                 <Link href="#" className="layout-header__nav-link">
                                     <Text variant="body-m" color="text-inverse">

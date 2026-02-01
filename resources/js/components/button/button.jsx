@@ -22,6 +22,7 @@ const Button = forwardRef((props, ref) => {
         children,
         prefix,
         suffix,
+        className,
         ...restProps
     } = props;
 
@@ -35,7 +36,8 @@ const Button = forwardRef((props, ref) => {
                 `vf-button--variant-${variant}`,
                 disabled && 'vf-button--disabled',
                 pressed && 'vf-button--pressed',
-                loading && 'vf-button--loading'
+                loading && 'vf-button--loading',
+                className
             )}
             style={{
                 ...(width && { '--vf-button-width': width }),

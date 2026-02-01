@@ -1,3 +1,4 @@
+import { useState, useRef, useEffect } from 'react';
 import Box from '@/components/box/box';
 import Text from '@/components/text/text';
 import TextInput from '@/components/text-input/text-input';
@@ -6,7 +7,20 @@ import BlockStack from '@/components/block-stack/block-stack';
 
 const WordRow = (props) => {
     const { wordData, direction, mode, answer, onAnswerChange, onReveal, isRevealed = false } = props;
-    
+    const [showAlternatePopup, setShowAlternatePopup] = useState(false);
+    const alternateTriggerRef = useRef(null);
+
+    useEffect(() => {
+        if (!showAlternatePopup) return;
+        const handleClickOutside = (e) => {
+            if (alternateTriggerRef.current && !alternateTriggerRef.current.contains(e.target)) {
+                setShowAlternatePopup(false);
+            }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, [showAlternatePopup]);
+
     const word = wordData.word;
     const nativeGloss = word.glosses?.find((g) => g.role === 'native');
     const middleGloss = word.glosses?.find((g) => g.role === 'middle');
@@ -77,10 +91,20 @@ const WordRow = (props) => {
                                 ALTERNATIVE
                             </Text>
                         </Box>
-                        <Box opacity={0.85}>
+                        <Box
+                            ref={alternateTriggerRef}
+                            className="word-row__alternate-trigger"
+                            opacity={0.85}
+                            onClick={() => setShowAlternatePopup(true)}
+                        >
                             <Text variant="body-l" fontWeight="bold" align="center">
                                 {word.alternative_writing || word.primary_reading}
                             </Text>
+                            {showAlternatePopup && (
+                                <span className="word-row__alternate-tooltip" role="tooltip">
+                                    {word.alternative_writing || word.primary_reading}
+                                </span>
+                            )}
                         </Box>
                     </Box>
                 </BlockStack>

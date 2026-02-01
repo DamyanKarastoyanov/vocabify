@@ -1,0 +1,34 @@
+とくに,,особено,specially | adverb
+いちばん,,най-вече,most | adverb
+おもいだします,思い出します,спомням си,remember | verb,masu-form
+いらっしゃいます,,идва/отивa (учтива форма),go/come (polite) | verb,masu-form,polite
+こうこう,高校,гимназия,high school | noun,education
+かぞく,家族,семейство,family | noun
+にほんばし,日本橋,квартал в Осака,Nihonbashi | proper_noun,location
+あきはばら,,електроника квартал в Токио,Akihabara | proper_noun,location
+
+たちます,立ちます,ставам,stand | verb,masu-form
+すわります,座ります,сядам,sit | verb,masu-form
+つかいます,使います,използвам,use | verb,masu-form
+おきます,置きます,слагам/поставям,put | verb,masu-form
+つくります,作ります,правя/създавам,make | verb,masu-form
+うります,売ります,продавам,sell | verb,masu-form
+しります,知ります,зная/научавам,know | verb,masu-form
+すみます,住みます,живея,live | verb,masu-form
+けんきゅうします,研究します,изследвам,research | verb,masu-form
+しっています,知っています,знам,know | verb,te-form
+すんでいます,住んでいます,живея (в момента),be living | verb,te-form
+おおさかに～,大阪に～,в Осака,in Osaka | grammar-pattern,location-expression
+
+しりょう,資料,материали/данни,materials | noun
+カタログ,,каталог,catalog | noun
+じこくひょう,時刻表,разписание,timetable | noun
+ふく,服,дрехи,clothes | noun
+せいひん,製品,продукт,product | noun
+ソフト,,софтуер,software | noun
+せんもん,専門,специалност,specialty | noun
+
+はいしゃ,歯医者,зъболекар,dentist | noun,profession
+とこや,床屋,бръснарница,barbershop | noun,location
+プレイガイド,,каса за билети,ticket office | noun
+どくしん,独身,ерген/неженен,single | adjective,na-adjective
